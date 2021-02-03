@@ -1,0 +1,10 @@
+.profile__avatar {
+  display: flex;
+  width: 120px;
+  height: 120px;
+  background-image: url("../../../images/jacques.jpg");
+  background-size: cover;
+  border-radius: 50%;
+  background-position: center center;
+
+}

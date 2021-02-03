@@ -1,0 +1,20 @@
+@import url("./_mobile/profile__info-btn_mobile.css");
+
+.profile__info-btn {
+  width: 24px;
+  height: 24px;
+  background-color: #000;
+  border: #fff solid 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0 15px 18px;
+}
+
+@media (max-width: 320px) {
+  .profile__info-btn {
+    width: 18px;
+    height: 18px;
+    margin: auto 15px auto 10px;
+    padding: 0;
+}
