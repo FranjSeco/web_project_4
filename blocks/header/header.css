@@ -1,11 +1,6 @@
 .header {
-<<<<<<< HEAD
   max-width: 880px;
   width: 100%;
-=======
-  max-width: 1280px;
-  width: 880px;
->>>>>>> origin/main
   height: 74px;
   margin: 45px auto 40px auto;
   border-bottom: 1px solid rgba(84, 84, 84, .7);
@@ -15,5 +10,6 @@
 @media (max-width: 320px) {
   .header {
     height: 56px;
+    margin-bottom: 0;
   }
 }
