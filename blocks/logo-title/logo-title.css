@@ -2,6 +2,12 @@
   background-repeat: no-repeat;
 }
 
+@media (max-width: 880px) {
+  .logo-title {
+    margin-left: 27px;
+  }
+}
+
 @media (max-width: 320px) {
   .logo-title {
     width: 126px;
