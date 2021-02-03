@@ -8,7 +8,7 @@
   color: #fff;
 }
 
-@media (max-width: 320px) {
+@media (max-width: 520px) {
   .profile__info-about {
     width: 282px;
     font-family: Inter;
