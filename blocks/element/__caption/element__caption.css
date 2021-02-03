@@ -1,0 +1,9 @@
+.element__caption {
+  width: 282px;
+  height: calc(361px - 282px);
+  background-color: #fff;
+  border-radius: 0 0 10px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
