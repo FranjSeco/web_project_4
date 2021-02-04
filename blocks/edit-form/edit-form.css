@@ -6,7 +6,7 @@
 
 .edit-form {
   visibility: hidden;
-  position: absolute;
+  position: fixed;
   z-index: 1000;
   width: 430px;
   height: 330px;
