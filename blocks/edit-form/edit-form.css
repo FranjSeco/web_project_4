@@ -12,14 +12,23 @@
   height: 330px;
   background-color: #fff;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+<<<<<<< HEAD
   border-radius: 10px;
   align-self: center;
   top: 195px;
+=======
+  opacity: 1;
+  align-self: center;
+  top: 195px;
+  border-radius: 10px;
+
+>>>>>>> origin/main
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+<<<<<<< HEAD
 
 
 @media (max-width: 450px) {
@@ -28,3 +37,5 @@
     top: 123px;
   }
 }
+=======
+>>>>>>> origin/main
