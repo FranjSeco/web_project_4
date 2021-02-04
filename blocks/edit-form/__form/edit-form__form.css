@@ -3,3 +3,10 @@
   height: 100%;
   margin: 34px auto 36.5px auto;
 }
+
+
+@media (max-width: 450px) {
+  .edit-form__form {
+    width: 200px;
+  }
+}
