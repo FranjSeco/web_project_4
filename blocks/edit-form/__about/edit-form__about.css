@@ -1,0 +1,12 @@
+.edit-form__about {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
+  border-bottom: 1px solid rgba(165, 147, 147, .2);
+  color: #000;
+  width: 100%;
+  height: 26.26px;
+  margin: 0 0 48px 0;
+}
