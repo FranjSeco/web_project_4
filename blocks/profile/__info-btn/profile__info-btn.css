@@ -11,6 +11,10 @@
   margin: 15px 0 15px 18px;
 }
 
+.profile__info-btn:hover {
+  opacity: .6;
+}
+
 @media (max-width: 520px) {
   .profile__info-btn {
     margin: auto 15px auto 10px;

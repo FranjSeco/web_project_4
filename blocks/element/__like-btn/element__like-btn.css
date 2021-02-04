@@ -1,7 +1,7 @@
 .element__like-btn {
-  margin: 0;
-  border: none;
-  background-color: #fff;
+  cursor: pointer;
 }
 
-
+.element__like-btn:hover {
+  opacity: .6;
+}

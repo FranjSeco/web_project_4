@@ -1,0 +1,9 @@
+.edit-form__close-icon {
+  z-index: 11000;
+  position: absolute;
+  right: -50px;
+  top: -50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
