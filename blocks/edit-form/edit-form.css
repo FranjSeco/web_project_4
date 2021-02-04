@@ -7,7 +7,6 @@
 @import url("./__close-image/edit-form__close-image.css");
 
 .edit-form {
-  visibility: hidden;
   position: fixed;
   z-index: 1000;
   width: 430px;
