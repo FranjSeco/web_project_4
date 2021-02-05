@@ -1,5 +1,9 @@
 .logo-title {
+  width: 173px;
+  height: 33px;
+  background-image: url("../../images/logo.svg");
   background-repeat: no-repeat;
+  background-size: contain;
 }
 
 @media (max-width: 880px) {
