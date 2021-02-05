@@ -1,5 +1,12 @@
 .element__like-btn {
   cursor: pointer;
+  border: none;
+}
+
+.element__like-btn:active,
+.element__like-btn:focus {
+  border: none;
+  outline: none;
 }
 
 .element__like-btn:hover {

@@ -1,5 +1,7 @@
+@import url("./_hidden/overaly_hidden.css");
+
 .overlay {
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   flex-direction: column;

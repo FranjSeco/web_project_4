@@ -5,16 +5,17 @@ let closeDown = document.querySelector(".edit-form__close-icon");
 
 function editBox() {
   let overlay = document.querySelector(".overlay");
-  overlay.classList.toggle("hidden");
+  console.log(overlay.classList);
+  overlay.classList.toggle("overlay_hidden");
   let box = document.querySelector(".edit-form");
-  box.classList.toggle("hidden");
+  box.classList.toggle("edit-form_hidden");
 }
 
 function closeIcon() {
   let closeBtn = document.querySelector(".overlay");
-  closeBtn.classList.toggle("hidden");
+  closeBtn.classList.toggle("overlay_hidden");
   let closeBox = document.querySelector(".edit-form");
-  closeBox.classList.toggle("hidden");
+  closeBox.classList.toggle("edit-form_hidden");
 }
 
 
