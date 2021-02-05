@@ -1,5 +1,9 @@
 @import url("./_disable/element__like_disable.css");
+@import url("./_active/element__like_active.css");
 
 
 .element__like {
+  width: 21px;
+  height: 19px;
+  background-color: #fff;
 }

@@ -6,7 +6,7 @@
 }
 
 
-@media (max-width: 450px) {
+@media (max-width: 530px) {
   .edit-form__form {
     width: 200px;
   }
