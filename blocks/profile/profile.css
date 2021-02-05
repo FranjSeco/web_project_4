@@ -18,12 +18,6 @@
   position: relative;
 }
 
-@media (max-width: 880px) {
-  .profile {
-    heigh
-  }
-}
-
 @media (max-width: 729px) {
   .profile {
     flex-direction: column;
