@@ -1,7 +1,7 @@
 // POP-UP
 
 let popUp = document.querySelector(".profile__info-btn");
-let close = document.querySelector(".edit-form__close-icon");
+let closeDown = document.querySelector(".edit-form__close-icon");
 
 function editBox() {
   let overlay = document.querySelector(".overlay");
@@ -18,7 +18,7 @@ function closeIcon() {
 }
 
 
-close.addEventListener("click", closeIcon);
+closeDown.addEventListener("click", closeIcon);
 popUp.addEventListener("click", editBox);
 
 
@@ -51,7 +51,7 @@ function saving(evt) {
   titleText.textContent = nameInput;
   aboutText.textContent = aboutInput;
 
-  closeIcon();
+  closeIcon()
 }
 
 save.addEventListener("submit", saving);
