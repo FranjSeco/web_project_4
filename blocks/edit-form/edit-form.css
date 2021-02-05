@@ -1,4 +1,3 @@
-@import url("./_hidden/edit-form_hidden.css");
 @import url("./__form/edit-form__form.css");
 @import url("./__name/edit-form__name.css");
 @import url("./__title/edit-form__title.css");
@@ -9,8 +8,8 @@
 
 
 .edit-form {
-  position: none;
-  z-index: 1000;
+  position: fixed;
+  z-index: 10000;
   width: 430px;
   height: 330px;
   background-color: #fff;
