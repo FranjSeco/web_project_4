@@ -10,8 +10,6 @@
 
 @media (max-width: 520px) {
   .profile__info-title {
-    font-style: normal;
-    font-weight: 500;
     font-size: 22px;
     line-height: 27px;
     text-align: center;

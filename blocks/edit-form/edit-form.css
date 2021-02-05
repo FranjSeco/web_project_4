@@ -7,19 +7,19 @@
 
 .edit-form {
   position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 10000;
   width: 430px;
-  height: 330px;
   background-color: #fff;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
-  align-self: center;
-  top: 195px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  align-self: center;
 }
+
 
 
 @media (max-width: 530px) {

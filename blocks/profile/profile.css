@@ -5,7 +5,6 @@
 @import url("./__info-btn/profile__info-btn.css");
 @import url("./__info-about/profile__info-about.css");
 @import url("./__add-btn/profile__add-btn.css");
-@import url("");
 
 
 .profile {
@@ -29,7 +28,6 @@
   .profile {
     box-sizing: border-box;
     width: 282px;
-    height: 286px;
     margin: 42px auto 36px auto;
   }
 }

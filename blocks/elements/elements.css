@@ -22,3 +22,9 @@
     grid-template-rows: 6fr;
   }
 }
+
+@media (max-width: 320px) {
+  .elements {
+    margin-bottom: 50px;
+  }
+}

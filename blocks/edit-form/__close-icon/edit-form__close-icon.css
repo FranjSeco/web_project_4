@@ -25,7 +25,9 @@
 
 @media (max-width: 410px) {
   .edit-form__close-icon {
-    right: -15px;
-    top: -60px;
+    width: 33.15px;
+    height: 33.15px;
+    right: -5px;
+    top: -40px;
   }
 }

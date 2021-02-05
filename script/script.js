@@ -2,13 +2,14 @@
 
 let popUp = document.querySelector(".profile__info-btn");
 let closeDown = document.querySelector(".edit-form__close-icon");
+let closeBtn = document.querySelector(".overlay");
 
 function editBox() {
   let openOver = document.querySelector(".overlay").classList.add("overlay_popup");
 }
 
 function closeIcon() {
-  let closeBtn = document.querySelector(".overlay");
+
   closeBtn.classList.remove("overlay_popup")
 }
 
