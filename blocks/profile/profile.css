@@ -20,14 +20,16 @@
 
 @media (max-width: 729px) {
   .profile {
+    max-width: 450px;
     flex-direction: column;
   }
 }
 
 @media (max-width: 320px) {
   .profile {
+    box-sizing: border-box;
     width: 282px;
     height: 286px;
-    margin: 42px 19px 36px 19px;
+    margin: 42px auto 36px auto;
   }
 }

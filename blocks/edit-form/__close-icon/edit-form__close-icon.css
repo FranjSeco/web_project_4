@@ -1,4 +1,7 @@
 .edit-form__close-icon {
+  max-width: 58px;
+  height: 58px;
+  width: 100%;
   z-index: 11000;
   position: absolute;
   right: -50px;
@@ -6,6 +9,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.edit-form__close-icon:hover {
+  opacity: .6;
 }
 
 @media (max-width: 410px) {
