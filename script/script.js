@@ -4,18 +4,12 @@ let popUp = document.querySelector(".profile__info-btn");
 let closeDown = document.querySelector(".edit-form__close-icon");
 
 function editBox() {
-  let overlay = document.querySelector(".overlay");
-  console.log(overlay.classList);
-  overlay.classList.toggle("overlay_hidden");
-  let box = document.querySelector(".edit-form");
-  box.classList.toggle("edit-form_hidden");
+  let openOver = document.querySelector(".overlay").classList.add("overlay_popup");
 }
 
 function closeIcon() {
   let closeBtn = document.querySelector(".overlay");
-  closeBtn.classList.toggle("overlay_hidden");
-  let closeBox = document.querySelector(".edit-form");
-  closeBox.classList.toggle("edit-form_hidden");
+  closeBtn.classList.remove("overlay_popup")
 }
 
 
@@ -27,8 +21,8 @@ popUp.addEventListener("click", editBox);
 
 let nameText = document.querySelector(".profile__info-title").textContent;
 let aboutText = document.querySelector(".profile__info-about").textContent;
-let placeName = document.querySelector(".edit-form__name");
-let placeAbout = document.querySelector(".edit-form__about");
+let placeName = document.querySelector(".edit-form__input_name");
+let placeAbout = document.querySelector(".edit-form__input_about");
 
 
 let newPlaceholder = placeName.setAttribute("value", nameText);
@@ -42,8 +36,8 @@ let save = document.querySelector(".edit-form__form");
 function saving(evt) {
   evt.preventDefault();
 
-  let nameInput = document.querySelector(".edit-form__name").value;
-  let aboutInput = document.querySelector(".edit-form__about").value;
+  let nameInput = document.querySelector(".edit-form__input_name").value;
+  let aboutInput = document.querySelector(".edit-form__input_about").value;
 
   let titleText = document.querySelector(".profile__info-title");
   let aboutText = document.querySelector(".profile__info-about");

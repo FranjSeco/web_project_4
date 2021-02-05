@@ -98,16 +98,17 @@
     </footer>
 
 
-    <section class="overlay overlay_popup">
+    <section class="overlay">
       <div class="edit-form">
-        <img src="./images/CloseIcon.png" alt="Close Icon" class="edit-form__close-icon">
+        <button class="edit-form__close-icon" type="button"> </button>
 
-        <form class="edit-form__form" action="">
-          <p class="edit-form__title">Edit profile</p>
-          <input class="edit-form__name" type="text" name="Name" value="" placeholder="">
-          <input class="edit-form__about" type="text" name="About" value="" placeholder="">
-          <input class="edit-form__btn" type="submit" value="Save">
+        <form class="edit-form__form" name="myForm">
+          <h2 class="edit-form__title">Edit profile</h2>
+          <input class="edit-form__input edit-form__input_name" type="text" name="Name" value="" placeholder="">
+          <input class="edit-form__input edit-form__input_about" type="text" name="About" value="" placeholder="">
+          <button class="edit-form__btn" type="button">Save</button>
         </form>
+      </div>
     </section>
   </div>
 

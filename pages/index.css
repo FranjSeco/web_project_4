@@ -14,3 +14,6 @@
 
 @import url("../blocks/overlay/overlay.css");
 @import url("../blocks/edit-form/edit-form.css");
+
+@import url("../blocks/overlay/_popup/overlay_popup.css");
+
