@@ -1,4 +1,7 @@
 .profile__add-btn {
+  background-image: url("../../../images/cross.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
   margin-left: auto;
   width: 150px;
   height: 50px;
@@ -35,5 +38,11 @@
     width: 282px;
     height: 50px;
     margin: 0;
+  }
+}
+
+@media (max-width: 320px) {
+  .profile__add-btn {
+    background-size: 16px;
   }
 }
