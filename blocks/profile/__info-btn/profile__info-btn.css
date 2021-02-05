@@ -1,6 +1,9 @@
 @import url("./_mobile/profile__info-btn_mobile.css");
 
 .profile__info-btn {
+  background-image: url("../../../images/pen.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
   width: 24px;
   height: 24px;
   background-color: #000;
@@ -24,6 +27,7 @@
 
 @media (max-width: 320px) {
   .profile__info-btn {
+    background-size: 7.5px;
     width: 18px;
     height: 18px;
   }
