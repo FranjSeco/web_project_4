@@ -19,12 +19,12 @@
         <div class="profile__info">
           <div class="profile__info-block">
             <h1 class="profile__info-title">Jacques Cousteau</h1>
-            <button class="profile__info-btn">
+            <button class="profile__info-btn" type="button">
             </button>
           </div>
           <p class="profile__info-about">Explorer</p>
         </div>
-        <button class="profile__add-btn">
+        <button class="profile__add-btn" type="button">
         </button>
       </section>
       <section class="elements">
@@ -32,7 +32,7 @@
           <img class="element__image" src="./images/kirill-pershin-1088404-yosemite.jpg" alt="Yosemite Valley">
           <div class="element__text">
             <h2 class="element__title">Yosemite Valley</h2>
-            <button class="element__like-btn element__like element__like_disable" id="firstElement"
+            <button class="element__like-btn" id="firstElement"
               type="button"></button>
           </div>
         </div>
@@ -40,7 +40,7 @@
           <img class="element__image" src="./images/kirill-pershin-1404681-lakelouise.png" alt="Lake Louise">
           <div class="element__text">
             <h2 class="element__title">Lake Louise</h2>
-            <button class="element__like-btn element__like element__like_disable" id="secondElement"
+            <button class="element__like-btn" id="secondElement"
               type="button"></button>
           </div>
         </div>
@@ -48,7 +48,7 @@
           <img class="element__image" src="./images/kirill-pershin-1556355-bald.png" alt="Bald Mountains">
           <div class="element__text">
             <h2 class="element__title">Bald Mountains</h2>
-            <button class="element__like-btn element__like element__like_disable" id="thirdElement"
+            <button class="element__like-btn" id="thirdElement"
               type="button"></button>
           </div>
         </div>
@@ -56,7 +56,7 @@
           <img class="element__image" src="./images/kirill-pershin-1404681-latemar.png" alt="Latemar">
           <div class="element__text">
             <h2 class="element__title">Latemar</h2>
-            <button class="element__like-btn element__like element__like_disable" id="fourthElement"
+            <button class="element__like-btn" id="fourthElement"
               type="button"></button>
           </div>
         </div>
@@ -64,7 +64,7 @@
           <img class="element__image" src="./images/kirill-pershin-1556355-vanoise.png" alt="Vanoise National Park">
           <div class="element__text">
             <h2 class="element__title">Vanoise National Park</h2>
-            <button class="element__like-btn element__like element__like_disable" id="fifthElement"
+            <button class="element__like-btn" id="fifthElement"
               type="button"></button>
           </div>
         </div>
@@ -72,7 +72,7 @@
           <img class="element__image" src="./images/kirill-pershin-1088404-lagodibraies.png" alt="Lago Di Braies">
           <div class="element__text">
             <h2 class="element__title">Lago Di Braies</h2>
-            <button class="element__like-btn element__like element__like_disable" id="sixthElement"
+            <button class="element__like-btn" id="sixthElement"
               type="button"></button>
           </div>
         </div>
@@ -81,17 +81,17 @@
     <footer class="footer">
       <p class="footer__text">© 2021 Around The U.S. Francisco Seco.</p>
     </footer>
-    <section class="overlay">
+    <div class="overlay">
       <div class="edit-form">
         <button class="edit-form__close-icon" type="button"> </button>
         <form class="edit-form__form" name="myForm">
           <h2 class="edit-form__title">Edit profile</h2>
           <input class="edit-form__input edit-form__input_name" type="text" name="Name" value="" placeholder="">
           <input class="edit-form__input edit-form__input_about" type="text" name="About" value="" placeholder="">
-          <button class="edit-form__btn" type="button">Save</button>
+          <button class="edit-form__btn" type="submit">Save</button>
         </form>
       </div>
-    </section>
+    </div>
   </div>
   <script src="./script/script.js"></script>
 </body>

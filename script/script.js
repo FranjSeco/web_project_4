@@ -32,7 +32,7 @@ popUp.addEventListener("click", editBox);
 
 // SAVING PROFILE
 
-let save = document.querySelector(".edit-form__btn");
+let save = document.querySelector(".edit-form__form");
 
 function saving(evt) {
   evt.preventDefault();
@@ -43,7 +43,7 @@ function saving(evt) {
   closeIcon()
 }
 
-save.addEventListener("click", saving);
+save.addEventListener("submit", saving);
 
 // // Like element 1
 
