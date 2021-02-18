@@ -16,7 +16,6 @@ function editBox() {
 }
 
 function closeIcon() {
-
   closeBtn.classList.remove("overlay_popup")
 }
 
@@ -26,6 +25,7 @@ popUp.addEventListener("click", editBox);
 
 
 // EDIT FORM: NAME AND ABOUT
+// ADDING CARD FORM
 
 
 
