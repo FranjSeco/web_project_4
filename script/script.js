@@ -125,3 +125,44 @@ save.addEventListener("submit", saving);
 
 
 
+// Template card
+
+const cards = document.querySelector("#el-template").content;
+const element = cards.querySelector(".element");
+const elementSection = document.querySelector(".elements");
+const initialCards = [
+  {
+    name: "Yosemite Valley",
+    link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
+  },
+  {
+    name: "Lake Louise",
+    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
+  },
+  {
+    name: "Bald Mountains",
+    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
+  },
+  {
+    name: "Latemar",
+    link: "https://code.s3.yandex.net/web-code/latemar.jpg"
+  },
+  {
+    name: "Vanoise National Park",
+    link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://code.s3.yandex.net/web-code/lago.jpg"
+  }
+];
+
+initialCards.forEach(item => {
+  console.log(item);
+  const cloneCard = element.cloneNode(true);
+  cloneCard.querySelector(".element__image").src = item.link;
+  cloneCard.querySelector(".element__image").alt = `Picture of ${item.name}`;
+  cloneCard.querySelector(".element__title").textContent = item.name;
+  elementSection.append(cloneCard);
+  console.log(cloneCard);
+});
