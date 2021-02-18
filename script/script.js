@@ -20,13 +20,43 @@ function closeIcon() {
 }
 
 
-closeDown.addEventListener("click", closeIcon);
-popUp.addEventListener("click", editBox);
+//closeDown.addEventListener("click", closeIcon);
+//popUp.addEventListener("click", editBox);
 
 
 // EDIT FORM: NAME AND ABOUT
 // ADDING CARD FORM
+const imageForm = document.querySelector("#form-template").content;
+const overlay = imageForm.querySelector(".overlay");
+const addBtn = document.querySelector(".profile__add-btn");
+const page = document.querySelector(".page");
 
+addBtn.addEventListener("click", function () {
+  console.log("click");
+  const addClick = overlay.cloneNode(true);
+  page.append(addClick);
+  addClick.classList.add("overlay_popup");
+  addClick.querySelector(".edit-form__title").textContent = "New Place";
+  addClick.querySelector(".edit-form__input_name").placeholder = "Title";
+  addClick.querySelector(".edit-form__input_about").placeholder = "Image URL";
+  addClick.querySelector(".edit-form__close-icon").addEventListener("click", function () {
+    addClick.classList.remove("overlay_popup");
+  });
+
+  addClick.querySelector(".edit-form__btn").addEventListener("click", function (evt) {
+    evt.preventDefault();
+    const newCard = element.cloneNode(true);
+    elementSection.prepend(newCard);
+    newCard.querySelector(".element__image").src = addClick.querySelector(".edit-form__input_about").value;
+    newCard.querySelector(".element__image").alt = `Picture of ${addClick.querySelector(".edit-form__input_name").value}`;
+    newCard.querySelector(".element__title").textContent = addClick.querySelector(".edit-form__input_name").value;
+    addClick.classList.remove("overlay_popup");
+  })
+
+
+
+
+});
 
 
 
@@ -43,7 +73,7 @@ function saving(evt) {
   closeIcon()
 }
 
-save.addEventListener("submit", saving);
+//save.addEventListener("submit", saving);
 
 // // Like element 1
 
