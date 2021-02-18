@@ -1,38 +1,39 @@
-// POP-UP
-
-let popUp = document.querySelector(".profile__info-btn");
-let closeDown = document.querySelector(".edit-form__close-icon");
-let closeBtn = document.querySelector(".overlay");
-
-let nameText = document.querySelector(".profile__info-title");
-let aboutText = document.querySelector(".profile__info-about");
-let placeName = document.querySelector(".edit-form__input_name");
-let placeAbout = document.querySelector(".edit-form__input_about");
-
-function editBox() {
-  let openOver = closeBtn.classList.add("overlay_popup");
-  placeName.value = nameText.textContent;
-  placeAbout.value = aboutText.textContent;
-}
-
-function closeIcon() {
-  closeBtn.classList.remove("overlay_popup")
-}
-
-
-//closeDown.addEventListener("click", closeIcon);
-//popUp.addEventListener("click", editBox);
-
-
-// EDIT FORM: NAME AND ABOUT
-// ADDING CARD FORM
-const imageForm = document.querySelector("#form-template").content;
-const overlay = imageForm.querySelector(".overlay");
-const addBtn = document.querySelector(".profile__add-btn");
+// FORM OVERLAY
+const form = document.querySelector("#form-template").content;
+const overlay = form.querySelector(".overlay");
 const page = document.querySelector(".page");
 
+// EDIT FORM: NAME AND ABOUT
+const editBtn = document.querySelector(".profile__info-btn");
+
+editBtn.addEventListener("click", function () {
+  console.log("Click");
+  let nameText = document.querySelector(".profile__info-title");
+  let aboutText = document.querySelector(".profile__info-about");
+
+  const editClick = overlay.cloneNode(true);
+  page.append(editClick);
+  editClick.classList.add("overlay_popup");
+  editClick.querySelector(".edit-form__title").textContent = "Edit profile";
+  editClick.querySelector(".edit-form__input_name").placeholder = nameText.textContent;
+  editClick.querySelector(".edit-form__input_about").placeholder = aboutText.textContent;
+  editClick.querySelector(".edit-form__close-icon").addEventListener("click", function () {
+    editClick.classList.remove("overlay_popup");
+  });
+
+  editClick.querySelector(".edit-form__btn").addEventListener("click", function (evt) {
+    evt.preventDefault();
+    nameText.textContent = editClick.querySelector(".edit-form__input_name").value;
+    aboutText.textContent = editClick.querySelector(".edit-form__input_about").value;
+    editClick.classList.remove("overlay_popup");
+  });
+});
+
+// ADDING CARD FORM
+const addBtn = document.querySelector(".profile__add-btn");
+
+
 addBtn.addEventListener("click", function () {
-  console.log("click");
   const addClick = overlay.cloneNode(true);
   page.append(addClick);
   addClick.classList.add("overlay_popup");
@@ -51,111 +52,12 @@ addBtn.addEventListener("click", function () {
     newCard.querySelector(".element__image").alt = `Picture of ${addClick.querySelector(".edit-form__input_name").value}`;
     newCard.querySelector(".element__title").textContent = addClick.querySelector(".edit-form__input_name").value;
     addClick.classList.remove("overlay_popup");
-  })
-
-
-
-
+  });
 });
 
 
 
-// SAVING PROFILE
-
-let save = document.querySelector(".edit-form__form");
-
-function saving(evt) {
-  evt.preventDefault();
-
-  nameText.textContent = placeName.value;
-  aboutText.textContent = placeAbout.value;
-
-  closeIcon()
-}
-
-//save.addEventListener("submit", saving);
-
-// // Like element 1
-
-// let heart = document.querySelector("#firstElement");
-// let heartSecond = document.querySelector("#secondElement");
-// let heartThird = document.querySelector("#thirdElement");
-// let heartFourth = document.querySelector("#fourthElement");
-// let heartFifth = document.querySelector("#fifthElement");
-// let heartSixth = document.querySelector("#sixthElement");
-
-
-// function changeHeart1() {
-//   let heartClass1 = heart.classList;
-//   if (heartClass1.contains("element__like_disable")) {
-//     heartClass1.remove("element__like_disable");
-//     heartClass1.add("element__like_active");
-//   } else {
-//     heartClass1.remove("element__like_active");
-//     heartClass1.add("element__like_disable");
-//   }
-// }
-// function changeHeart2() {
-//   let heartClass2 = heartSecond.classList;
-//   if (heartClass2.contains("element__like_disable")) {
-//     heartClass2.remove("element__like_disable");
-//     heartClass2.add("element__like_active");
-//   } else {
-//     heartClass2.remove("element__like_active");
-//     heartClass2.add("element__like_disable");
-//   }
-// }
-// function changeHeart3() {
-//   let heartClass3 = heartThird.classList;
-//   if (heartClass3.contains("element__like_disable")) {
-//     heartClass3.remove("element__like_disable");
-//     heartClass3.add("element__like_active");
-//   } else {
-//     heartClass3.remove("element__like_active");
-//     heartClass3.add("element__like_disable");
-//   }
-// }
-// function changeHeart4() {
-//   let heartClass4 = heartFourth.classList;
-//   if (heartClass4.contains("element__like_disable")) {
-//     heartClass4.remove("element__like_disable");
-//     heartClass4.add("element__like_active");
-//   } else {
-//     heartClass4.remove("element__like_active");
-//     heartClass4.add("element__like_disable");
-//   }
-// }
-// function changeHeart5() {
-//   let heartClass5 = heartFifth.classList;
-//   if (heartClass5.contains("element__like_disable")) {
-//     heartClass5.remove("element__like_disable");
-//     heartClass5.add("element__like_active");
-//   } else {
-//     heartClass5.remove("element__like_active");
-//     heartClass5.add("element__like_disable");
-//   }
-// }
-// function changeHeart6() {
-//   let heartClass6 = heartSixth.classList;
-//   if (heartClass6.contains("element__like_disable")) {
-//     heartClass6.remove("element__like_disable");
-//     heartClass6.add("element__like_active");
-//   } else {
-//     heartClass6.remove("element__like_active");
-//     heartClass6.add("element__like_disable");
-//   }
-// }
-
-// heart.addEventListener("click", changeHeart1);
-// heartSecond.addEventListener("click", changeHeart2);
-// heartThird.addEventListener("click", changeHeart3);
-// heartFourth.addEventListener("click", changeHeart4);
-// heartFifth.addEventListener("click", changeHeart5);
-// heartSixth.addEventListener("click", changeHeart6);
-
-
-
-// Template card
+// CARD TEMPLATE
 
 const cards = document.querySelector("#el-template").content;
 const element = cards.querySelector(".element");
@@ -188,11 +90,23 @@ const initialCards = [
 ];
 
 initialCards.forEach(item => {
-  console.log(item);
   const cloneCard = element.cloneNode(true);
   cloneCard.querySelector(".element__image").src = item.link;
   cloneCard.querySelector(".element__image").alt = `Picture of ${item.name}`;
   cloneCard.querySelector(".element__title").textContent = item.name;
   elementSection.append(cloneCard);
-  console.log(cloneCard);
+});
+
+
+// LIKE BTN
+
+const likeBtn = document.querySelector(".elements");
+
+likeBtn.addEventListener("click", function(event) {
+
+  const eventTarget = event.target;
+  console.log(eventTarget);
+  if (eventTarget.classList.contains("element__like")) {
+    eventTarget.classList.add("element__like-black");
+  }
 });
