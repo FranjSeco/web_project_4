@@ -1,4 +1,4 @@
-.edit-form__close-icon {
+.close-icon {
   max-width: 58px;
   height: 58px;
   width: 100%;
@@ -19,12 +19,12 @@
   background-size: contain;
 }
 
-.edit-form__close-icon:hover {
+.close-icon:hover {
   opacity: .6;
 }
 
 @media (max-width: 410px) {
-  .edit-form__close-icon {
+  .close-icon {
     width: 33.15px;
     height: 33.15px;
     right: -10px;

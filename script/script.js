@@ -7,7 +7,6 @@ const page = document.querySelector(".page");
 const editBtn = document.querySelector(".profile__info-btn");
 
 editBtn.addEventListener("click", function () {
-  console.log("Click");
   let nameText = document.querySelector(".profile__info-title");
   let aboutText = document.querySelector(".profile__info-about");
 
@@ -17,7 +16,8 @@ editBtn.addEventListener("click", function () {
   editClick.querySelector(".edit-form__title").textContent = "Edit profile";
   editClick.querySelector(".edit-form__input_name").placeholder = nameText.textContent;
   editClick.querySelector(".edit-form__input_about").placeholder = aboutText.textContent;
-  editClick.querySelector(".edit-form__close-icon").addEventListener("click", function () {
+  editClick.querySelector(".edit-form__btn").textContent = "Save";
+  editClick.querySelector(".close-icon").addEventListener("click", function () {
     editClick.classList.remove("overlay_popup");
   });
 
@@ -40,7 +40,8 @@ addBtn.addEventListener("click", function () {
   addClick.querySelector(".edit-form__title").textContent = "New Place";
   addClick.querySelector(".edit-form__input_name").placeholder = "Title";
   addClick.querySelector(".edit-form__input_about").placeholder = "Image URL";
-  addClick.querySelector(".edit-form__close-icon").addEventListener("click", function () {
+  addClick.querySelector(".edit-form__btn").textContent = "Create";
+  addClick.querySelector(".close-icon").addEventListener("click", function () {
     addClick.classList.remove("overlay_popup");
   });
 
@@ -100,9 +101,8 @@ initialCards.forEach(item => {
 
 // LIKE BTN
 
-const likeBtn = document.querySelector(".elements");
 
-likeBtn.addEventListener("click", function(event) {
+elementSection.addEventListener("click", function(event) {
   if (event.target.tagName == "BUTTON" && event.target.classList.contains("element__like-btn")) {
     if (event.target.classList.contains("element__like-black")) {
       event.target.classList.remove("element__like-black");
@@ -115,11 +115,30 @@ likeBtn.addEventListener("click", function(event) {
 
 // TRASH BTN
 
-const trash = document.querySelector(".elements");
-
-trash.addEventListener("click", function (event) {
+elementSection.addEventListener("click", function (event) {
   if (event.target.tagName == "BUTTON" && event.target.classList.contains("element__trash")) {
     const del = event.target.closest(".element");
     del.remove();
   }
 });
+
+// Opening the Picture Popup
+
+elementSection.addEventListener("click", function(event) {
+  if (event.target.tagName == "IMG" && event.target.classList.contains("element__image")) {
+    console.log(event.target.tagName);
+    const imageClick = overlay.cloneNode(true);
+    page.append(imageClick);
+    imageClick.classList.add("overlay_popup");
+    imageClick.querySelector(".edit-form").style.display = "none";
+    imageClick.querySelector(".image-popup").style.display = "flex";
+    const imagePop = imageClick.querySelector(".image-popup__picture");
+    imagePop.style.display = "flex";
+    imagePop.src = event.target.src;
+    imagePop.alt = event.target.alt;
+    imageClick.querySelector(".close-icon").addEventListener("click", function () {
+      imageClick.classList.remove("overlay_popup");
+    });
+  }
+});
+
