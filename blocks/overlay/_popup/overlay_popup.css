@@ -1,3 +1,14 @@
+@-webkit-keyframes fadeIn {
+  from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 .overlay_popup  {
   display: flex;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
 }

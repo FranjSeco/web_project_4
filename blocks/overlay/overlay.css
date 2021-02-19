@@ -1,3 +1,12 @@
+@-webkit-keyframes fadeOut {
+  from { opacity: 1; }
+    to { opacity: 0; }
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+    to { opacity: 0; }
+}
+
 .overlay {
   display: none;
   justify-content: center;
@@ -10,4 +19,6 @@
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, .5);
+  -webkit-animation: fadeOut 1s;
+  animation: fadeOut 1s;
 }

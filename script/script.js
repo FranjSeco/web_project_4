@@ -1,15 +1,28 @@
-// FORM OVERLAY
+//VARIABLES
 const form = document.querySelector("#form-template").content;
 const overlay = form.querySelector(".overlay");
 const page = document.querySelector(".page");
+const editBtn = document.querySelector(".profile__info-btn");
+const addBtn = document.querySelector(".profile__add-btn");
+const cards = document.querySelector("#el-template").content;
+const element = cards.querySelector(".element");
+const elementSection = document.querySelector(".elements");
+
+// FUNCTIONS
+
+
+// EVENT LISTENER CLOSE ICON
+page.addEventListener("click", function (event) {
+  if (event.target.tagName == "BUTTON" && event.target.classList.contains("close-icon")) {
+    page.querySelector(".overlay").remove();
+  }
+});
+
 
 // EDIT FORM: NAME AND ABOUT
-const editBtn = document.querySelector(".profile__info-btn");
-
 editBtn.addEventListener("click", function () {
   let nameText = document.querySelector(".profile__info-title");
   let aboutText = document.querySelector(".profile__info-about");
-
   const editClick = overlay.cloneNode(true);
   page.append(editClick);
   editClick.classList.add("overlay_popup");
@@ -17,10 +30,6 @@ editBtn.addEventListener("click", function () {
   editClick.querySelector(".edit-form__input_name").placeholder = nameText.textContent;
   editClick.querySelector(".edit-form__input_about").placeholder = aboutText.textContent;
   editClick.querySelector(".edit-form__btn").textContent = "Save";
-  editClick.querySelector(".close-icon").addEventListener("click", function () {
-    editClick.classList.remove("overlay_popup");
-  });
-
   editClick.querySelector(".edit-form__btn").addEventListener("click", function (evt) {
     evt.preventDefault();
     nameText.textContent = editClick.querySelector(".edit-form__input_name").value;
@@ -30,8 +39,6 @@ editBtn.addEventListener("click", function () {
 });
 
 // ADDING CARD FORM
-const addBtn = document.querySelector(".profile__add-btn");
-
 
 addBtn.addEventListener("click", function () {
   const addClick = overlay.cloneNode(true);
@@ -41,10 +48,6 @@ addBtn.addEventListener("click", function () {
   addClick.querySelector(".edit-form__input_name").placeholder = "Title";
   addClick.querySelector(".edit-form__input_about").placeholder = "Image URL";
   addClick.querySelector(".edit-form__btn").textContent = "Create";
-  addClick.querySelector(".close-icon").addEventListener("click", function () {
-    addClick.classList.remove("overlay_popup");
-  });
-
   addClick.querySelector(".edit-form__btn").addEventListener("click", function (evt) {
     evt.preventDefault();
     const newCard = element.cloneNode(true);
@@ -52,17 +55,13 @@ addBtn.addEventListener("click", function () {
     newCard.querySelector(".element__image").src = addClick.querySelector(".edit-form__input_about").value;
     newCard.querySelector(".element__image").alt = `Picture of ${addClick.querySelector(".edit-form__input_name").value}`;
     newCard.querySelector(".element__title").textContent = addClick.querySelector(".edit-form__input_name").value;
-    addClick.classList.remove("overlay_popup");
+
   });
 });
 
 
 
 // CARD TEMPLATE
-
-const cards = document.querySelector("#el-template").content;
-const element = cards.querySelector(".element");
-const elementSection = document.querySelector(".elements");
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -100,9 +99,7 @@ initialCards.forEach(item => {
 
 
 // LIKE BTN
-
-
-elementSection.addEventListener("click", function(event) {
+page.addEventListener("click", function(event) {
   if (event.target.tagName == "BUTTON" && event.target.classList.contains("element__like-btn")) {
     if (event.target.classList.contains("element__like-black")) {
       event.target.classList.remove("element__like-black");
@@ -114,19 +111,16 @@ elementSection.addEventListener("click", function(event) {
 
 
 // TRASH BTN
-
-elementSection.addEventListener("click", function (event) {
+page.addEventListener("click", function (event) {
   if (event.target.tagName == "BUTTON" && event.target.classList.contains("element__trash")) {
     const del = event.target.closest(".element");
     del.remove();
   }
 });
 
-// Opening the Picture Popup
-
-elementSection.addEventListener("click", function(event) {
+// PICTURE POPUP
+page.addEventListener("click", function(event) {
   if (event.target.tagName == "IMG" && event.target.classList.contains("element__image")) {
-    console.log(event.target.tagName);
     const imageClick = overlay.cloneNode(true);
     page.append(imageClick);
     imageClick.classList.add("overlay_popup");
@@ -136,9 +130,6 @@ elementSection.addEventListener("click", function(event) {
     imagePop.style.display = "flex";
     imagePop.src = event.target.src;
     imagePop.alt = event.target.alt;
-    imageClick.querySelector(".close-icon").addEventListener("click", function () {
-      imageClick.classList.remove("overlay_popup");
-    });
   }
 });
 
