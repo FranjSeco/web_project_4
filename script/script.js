@@ -103,10 +103,23 @@ initialCards.forEach(item => {
 const likeBtn = document.querySelector(".elements");
 
 likeBtn.addEventListener("click", function(event) {
+  if (event.target.tagName == "BUTTON" && event.target.classList.contains("element__like-btn")) {
+    if (event.target.classList.contains("element__like-black")) {
+      event.target.classList.remove("element__like-black");
+    } else {
+      event.target.classList.add("element__like-black");
+    }
+  };
+});
 
-  const eventTarget = event.target;
-  console.log(eventTarget);
-  if (eventTarget.classList.contains("element__like")) {
-    eventTarget.classList.add("element__like-black");
+
+// TRASH BTN
+
+const trash = document.querySelector(".elements");
+
+trash.addEventListener("click", function (event) {
+  if (event.target.tagName == "BUTTON" && event.target.classList.contains("element__trash")) {
+    const del = event.target.closest(".element");
+    del.remove();
   }
 });

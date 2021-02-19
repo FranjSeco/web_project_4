@@ -2,6 +2,7 @@
 @import url("./__text/element__text.css");
 @import url("./__title/element__title.css");
 @import url("./__like-btn/element__like-btn.css");
+@import url("./__trash/element__trash.css");
 @import url("./__like-black/element__like-black.css");
 
 
@@ -10,4 +11,5 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
 }

@@ -7,14 +7,6 @@
   border: none;
 }
 
-/* .element__like-btn:active,
-.element__like-btn:focus {
-
-  background-image: url("../../../images/black-like.png");
-  border: none;
-  outline: none;
-} */
-
 .element__like-btn:hover {
   opacity: .6;
 }
