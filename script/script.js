@@ -9,14 +9,14 @@ const element = cards.querySelector(".element");
 const elementSection = document.querySelector(".elements");
 
 // FUNCTIONS
-function overlayClone() {
-  const overlayClick = overlay.cloneNode(true);
-  page.append(editClick);
-  const overlayOn = document.querySelector(".overlay");
-  overlayOn.style.visibility = "1";
-  overlayOn.style.opacity = "1";
-  overlayOn.style.transition = "all 1s";
-}
+// function overlayClone() {
+//   const overlayClick = overlay.cloneNode(true);
+//   page.append(editClick);
+//   const overlayOn = document.querySelector(".overlay");
+//   overlayOn.style.visibility = "1";
+//   overlayOn.style.opacity = "1";
+//   overlayOn.style.transition = "all 1s";
+// }
 
 // EVENT LISTENER CLOSE ICON
 page.addEventListener("click", function (event) {
@@ -24,21 +24,19 @@ page.addEventListener("click", function (event) {
     const overlayPage = document.querySelector(".overlay");
     overlayPage.style.visibility = "0";
     overlayPage.style.opacity = "0";
-    overlayPage.style.transition = "all 1s";
+    overlayPage.style.transition = "all 0.5s";
     setTimeout(function () {
       overlayPage.remove();
-    }, 1100);
+    }, 700);
   }
 });
 
 
 // EDIT FORM: NAME AND ABOUT
 
-
 editBtn.addEventListener("click", function () {
   let nameText = document.querySelector(".profile__info-title");
   let aboutText = document.querySelector(".profile__info-about");
-
   const editClick = overlay.cloneNode(true);
   page.append(editClick);
   editClick.classList.add("overlay_popup");
