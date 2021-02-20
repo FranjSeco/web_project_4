@@ -1,7 +1,7 @@
 //VARIABLES
 const form = document.querySelector("#form-template").content;
-const overlay = form.querySelector(".overlay");
 const page = document.querySelector(".page");
+const overlay = form.querySelector(".overlay");
 const editBtn = document.querySelector(".profile__info-btn");
 const addBtn = document.querySelector(".profile__add-btn");
 const cards = document.querySelector("#el-template").content;
@@ -9,20 +9,36 @@ const element = cards.querySelector(".element");
 const elementSection = document.querySelector(".elements");
 
 // FUNCTIONS
-
+function overlayClone() {
+  const overlayClick = overlay.cloneNode(true);
+  page.append(editClick);
+  const overlayOn = document.querySelector(".overlay");
+  overlayOn.style.visibility = "1";
+  overlayOn.style.opacity = "1";
+  overlayOn.style.transition = "all 1s";
+}
 
 // EVENT LISTENER CLOSE ICON
 page.addEventListener("click", function (event) {
   if (event.target.tagName == "BUTTON" && event.target.classList.contains("close-icon")) {
-    page.querySelector(".overlay").remove();
+    const overlayPage = document.querySelector(".overlay");
+    overlayPage.style.visibility = "0";
+    overlayPage.style.opacity = "0";
+    overlayPage.style.transition = "all 1s";
+    setTimeout(function () {
+      overlayPage.remove();
+    }, 1100);
   }
 });
 
 
 // EDIT FORM: NAME AND ABOUT
+
+
 editBtn.addEventListener("click", function () {
   let nameText = document.querySelector(".profile__info-title");
   let aboutText = document.querySelector(".profile__info-about");
+
   const editClick = overlay.cloneNode(true);
   page.append(editClick);
   editClick.classList.add("overlay_popup");
@@ -99,7 +115,7 @@ initialCards.forEach(item => {
 
 
 // LIKE BTN
-page.addEventListener("click", function(event) {
+page.addEventListener("click", function (event) {
   if (event.target.tagName == "BUTTON" && event.target.classList.contains("element__like-btn")) {
     if (event.target.classList.contains("element__like-black")) {
       event.target.classList.remove("element__like-black");
@@ -119,7 +135,7 @@ page.addEventListener("click", function (event) {
 });
 
 // PICTURE POPUP
-page.addEventListener("click", function(event) {
+page.addEventListener("click", function (event) {
   if (event.target.tagName == "IMG" && event.target.classList.contains("element__image")) {
     const imageClick = overlay.cloneNode(true);
     page.append(imageClick);
