@@ -9,14 +9,7 @@ const element = cards.querySelector(".element");
 const elementSection = document.querySelector(".elements");
 
 // FUNCTIONS
-// function overlayClone() {
-//   const overlayClick = overlay.cloneNode(true);
-//   page.append(editClick);
-//   const overlayOn = document.querySelector(".overlay");
-//   overlayOn.style.visibility = "1";
-//   overlayOn.style.opacity = "1";
-//   overlayOn.style.transition = "all 1s";
-// }
+
 
 // EVENT LISTENER CLOSE ICON
 page.addEventListener("click", function (event) {
@@ -161,6 +154,7 @@ page.addEventListener("click", function (event) {
     imagePop.style.display = "flex";
     imagePop.src = event.target.src;
     imagePop.alt = event.target.alt;
+    imageClick.querySelector(".image-popup__caption").textContent = event.target.alt;
   }
 });
 

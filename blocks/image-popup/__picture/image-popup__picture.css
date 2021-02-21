@@ -6,3 +6,21 @@
 
   position: relative;
 }
+
+@media (max-width: 1000px) {
+  .image-popup__picture {
+    max-width: 600px;
+    margin: auto;
+  }
+}
+@media (max-width: 700px) {
+  .image-popup__picture {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 510px) {
+  .image-popup__picture {
+    max-width: 300px;
+  }
+}
