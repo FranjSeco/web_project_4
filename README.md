@@ -1,3 +1,13 @@
+# Project 4: Around The U.S. v2.0 (Implementation of logic with JS)
+
+### Overview
+
+Based on the same project, we have added functionality to the most of the page: Like button, adding cards, remove card, transition and more.
+
+## Plans for the future.
+
+### The functionality of some parts of the page could be improve. Once we learn about backend, we could use for this project.
+
 # Project 4: Around The U.S.
 
 ### Overview
