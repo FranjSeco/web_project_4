@@ -24,67 +24,6 @@ page.addEventListener("click", function (event) {
   }
 });
 
-
-// EDIT FORM: NAME AND ABOUT
-
-editBtn.addEventListener("click", function () {
-  let nameText = document.querySelector(".profile__info-title");
-  let aboutText = document.querySelector(".profile__info-about");
-  const editClick = overlay.cloneNode(true);
-  page.append(editClick);
-  editClick.classList.add("overlay_popup");
-  editClick.querySelector(".edit-form__title").textContent = "Edit profile";
-  editClick.querySelector(".edit-form__input_name").placeholder = nameText.textContent;
-  editClick.querySelector(".edit-form__input_about").placeholder = aboutText.textContent;
-  editClick.querySelector(".edit-form__btn").textContent = "Save";
-  editClick.querySelector(".edit-form__btn").addEventListener("click", function (evt) {
-    evt.preventDefault();
-    if (editClick.querySelector(".edit-form__input_name").value == "" || editClick.querySelector(".edit-form__input_about").value == "") {
-      alert("Please, insert valid information.")
-    } else {
-      nameText.textContent = editClick.querySelector(".edit-form__input_name").value;
-      aboutText.textContent = editClick.querySelector(".edit-form__input_about").value;
-      editClick.style.visibility = "0";
-      editClick.style.opacity = "0";
-      editClick.style.transition = "all 0.5s";
-      setTimeout(function () {
-        editClick.remove();
-      }, 700);
-    }
-  });
-});
-
-// ADDING CARD FORM
-
-addBtn.addEventListener("click", function () {
-  const addClick = overlay.cloneNode(true);
-  page.append(addClick);
-  addClick.classList.add("overlay_popup");
-  addClick.querySelector(".edit-form__title").textContent = "New Place";
-  addClick.querySelector(".edit-form__input_name").placeholder = "Title";
-  addClick.querySelector(".edit-form__input_about").placeholder = "Image URL";
-  addClick.querySelector(".edit-form__btn").textContent = "Create";
-  addClick.querySelector(".edit-form__btn").addEventListener("click", function (evt) {
-    evt.preventDefault();
-    if (addClick.querySelector(".edit-form__input_about").value !== "" && addClick.querySelector(".edit-form__input_name").value !== "") {
-      const newCard = element.cloneNode(true);
-      elementSection.prepend(newCard);
-      newCard.querySelector(".element__image").src = addClick.querySelector(".edit-form__input_about").value;
-      newCard.querySelector(".element__image").alt = `Picture of ${addClick.querySelector(".edit-form__input_name").value}`;
-      newCard.querySelector(".element__title").textContent = addClick.querySelector(".edit-form__input_name").value;
-      addClick.style.visibility = "0";
-      addClick.style.opacity = "0";
-      addClick.style.transition = "all 0.5s";
-      setTimeout(function () {
-        addClick.remove();
-      }, 700);
-    } else {
-      alert("Please, insert valid information.")
-    }
-  });
-});
-
-
 // CARD TEMPLATE
 const initialCards = [
   {
@@ -121,6 +60,64 @@ initialCards.forEach(item => {
   elementSection.append(cloneCard);
 });
 
+// PROFILE: NAME AND PROFESSION
+
+editBtn.addEventListener("click", function () {
+  let nameText = document.querySelector(".profile__info-title");
+  let aboutText = document.querySelector(".profile__info-about");
+  const editClick = overlay.cloneNode(true);
+  page.append(editClick);
+  editClick.classList.add("overlay_popup");
+  editClick.querySelector(".edit-form__title").textContent = "Edit profile";
+  editClick.querySelector(".edit-form__input_name").value = nameText.textContent;
+  editClick.querySelector(".edit-form__input_about").value = aboutText.textContent;
+  editClick.querySelector(".edit-form__btn").textContent = "Save";
+  editClick.querySelector(".edit-form__btn").addEventListener("click", function (evt) {
+    evt.preventDefault();
+    if (editClick.querySelector(".edit-form__input_name").value == "" || editClick.querySelector(".edit-form__input_about").value == "") {
+      alert("Please, insert valid information.")
+    } else {
+      nameText.textContent = editClick.querySelector(".edit-form__input_name").value;
+      aboutText.textContent = editClick.querySelector(".edit-form__input_about").value;
+      editClick.style.visibility = "0";
+      editClick.style.opacity = "0";
+      editClick.style.transition = "all 0.5s";
+      setTimeout(function () {
+        editClick.remove();
+      }, 700);
+    }
+  });
+});
+
+// ADDING CARD
+
+addBtn.addEventListener("click", function () {
+  const addClick = overlay.cloneNode(true);
+  page.append(addClick);
+  addClick.classList.add("overlay_popup");
+  addClick.querySelector(".edit-form__title").textContent = "New Place";
+  addClick.querySelector(".edit-form__input_name").placeholder = "Title";
+  addClick.querySelector(".edit-form__input_about").placeholder = "Image URL";
+  addClick.querySelector(".edit-form__btn").textContent = "Create";
+  addClick.querySelector(".edit-form__btn").addEventListener("click", function (evt) {
+    evt.preventDefault();
+    if (addClick.querySelector(".edit-form__input_about").value !== "" && addClick.querySelector(".edit-form__input_name").value !== "") {
+      const newCard = element.cloneNode(true);
+      elementSection.prepend(newCard);
+      newCard.querySelector(".element__image").src = addClick.querySelector(".edit-form__input_about").value;
+      newCard.querySelector(".element__image").alt = `Picture of ${addClick.querySelector(".edit-form__input_name").value}`;
+      newCard.querySelector(".element__title").textContent = addClick.querySelector(".edit-form__input_name").value;
+      addClick.style.visibility = "0";
+      addClick.style.opacity = "0";
+      addClick.style.transition = "all 0.5s";
+      setTimeout(function () {
+        addClick.remove();
+      }, 700);
+    } else {
+      alert("Please, insert valid information.")
+    }
+  });
+});
 
 // LIKE BTN
 page.addEventListener("click", function (event) {
