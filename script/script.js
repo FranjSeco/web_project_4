@@ -1,7 +1,7 @@
 //VARIABLES
 const form = document.querySelector("#form-template").content;
 const page = document.querySelector(".page");
-const overlay = form.querySelector(".overlay");
+const overlay = document.querySelector("#overlay");
 const editBtn = document.querySelector(".profile__info-btn");
 const addBtn = document.querySelector(".profile__add-btn");
 const cards = document.querySelector("#el-template").content;
@@ -9,18 +9,78 @@ const element = cards.querySelector(".element");
 const elementSection = document.querySelector(".elements");
 
 // FUNCTIONS
-
+function overlayToggle() {
+  if (overlay.classList.contains("overlay")) {
+    overlay.classList.add("overlay_popup");
+    overlay.classList.remove("overlay");
+  } else {
+    overlay.classList.add("overlay");
+    overlay.classList.remove("overlay_popup");
+  }
+}
 
 // EVENT LISTENER CLOSE ICON
 page.addEventListener("click", function (event) {
   if (event.target.tagName == "BUTTON" && event.target.classList.contains("close-icon")) {
-    const overlayPage = document.querySelector(".overlay");
-    overlayPage.style.visibility = "0";
-    overlayPage.style.opacity = "0";
-    overlayPage.style.transition = "all 0.5s";
+    overlayToggle()
     setTimeout(function () {
-      overlayPage.remove();
+      overlay.querySelector(".edit-form").remove();
     }, 700);
+  }
+});
+
+page.addEventListener("click", function (event) {
+  if (event.target.tagName == "BUTTON" && event.target.classList.contains("profile__info-btn")) {
+    let nameText = document.querySelector(".profile__info-title");
+    let aboutText = document.querySelector(".profile__info-about");
+
+    overlayToggle()
+
+    const editClick = form.querySelector(".edit-form").cloneNode(true);
+    overlay.append(editClick);
+    editClick.querySelector(".edit-form__title").textContent = "Edit profile";
+    editClick.querySelector(".edit-form__input_name").value = nameText.textContent;
+    editClick.querySelector(".edit-form__input_about").value = aboutText.textContent;
+    editClick.querySelector(".edit-form__btn").textContent = "Save";
+    editClick.querySelector(".edit-form__btn").addEventListener("click", function (evt) {
+      evt.preventDefault();
+      if (editClick.querySelector(".edit-form__input_name").value == "" || editClick.querySelector(".edit-form__input_about").value == "") {
+        alert("Please, insert valid information.")
+      } else {
+        nameText.textContent = editClick.querySelector(".edit-form__input_name").value;
+        aboutText.textContent = editClick.querySelector(".edit-form__input_about").value;
+        overlayToggle()
+        setTimeout(function () {
+          editClick.remove();
+        }, 700);
+      }
+    });
+  } else if (event.target.tagName == "BUTTON" && event.target.classList.contains("profile__add-btn")) {
+    overlayToggle();
+    const addClick = form.querySelector(".edit-form").cloneNode(true);
+    overlay.append(addClick);
+    addClick.querySelector(".edit-form__title").textContent = "New Place";
+    addClick.querySelector(".edit-form__input_name").placeholder = "Title";
+    addClick.querySelector(".edit-form__input_about").placeholder = "Image URL";
+    addClick.querySelector(".edit-form__btn").textContent = "Create";
+    addClick.querySelector(".edit-form__btn").addEventListener("click", function (evt) {
+      evt.preventDefault();
+      if (addClick.querySelector(".edit-form__input_about").value !== "" && addClick.querySelector(".edit-form__input_name").value !== "") {
+        const newCard = element.cloneNode(true);
+        elementSection.prepend(newCard);
+        newCard.querySelector(".element__image").src = addClick.querySelector(".edit-form__input_about").value;
+        newCard.querySelector(".element__image").alt = `Picture of ${addClick.querySelector(".edit-form__input_name").value}`;
+        newCard.querySelector(".element__title").textContent = addClick.querySelector(".edit-form__input_name").value;
+        addClick.style.visibility = "0";
+        addClick.style.opacity = "0";
+        addClick.style.transition = "all 0.5s";
+        setTimeout(function () {
+          addClick.remove();
+        }, 700);
+      } else {
+        alert("Please, insert valid information.")
+      }
+    });
   }
 });
 
@@ -62,62 +122,62 @@ initialCards.forEach(item => {
 
 // PROFILE: NAME AND PROFESSION
 
-editBtn.addEventListener("click", function () {
-  let nameText = document.querySelector(".profile__info-title");
-  let aboutText = document.querySelector(".profile__info-about");
-  const editClick = overlay.cloneNode(true);
-  page.append(editClick);
-  editClick.classList.add("overlay_popup");
-  editClick.querySelector(".edit-form__title").textContent = "Edit profile";
-  editClick.querySelector(".edit-form__input_name").value = nameText.textContent;
-  editClick.querySelector(".edit-form__input_about").value = aboutText.textContent;
-  editClick.querySelector(".edit-form__btn").textContent = "Save";
-  editClick.querySelector(".edit-form__btn").addEventListener("click", function (evt) {
-    evt.preventDefault();
-    if (editClick.querySelector(".edit-form__input_name").value == "" || editClick.querySelector(".edit-form__input_about").value == "") {
-      alert("Please, insert valid information.")
-    } else {
-      nameText.textContent = editClick.querySelector(".edit-form__input_name").value;
-      aboutText.textContent = editClick.querySelector(".edit-form__input_about").value;
-      editClick.style.visibility = "0";
-      editClick.style.opacity = "0";
-      editClick.style.transition = "all 0.5s";
-      setTimeout(function () {
-        editClick.remove();
-      }, 700);
-    }
-  });
-});
+// editBtn.addEventListener("click", function () {
+//   let nameText = document.querySelector(".profile__info-title");
+//   let aboutText = document.querySelector(".profile__info-about");
+
+//   overlayToggle()
+
+//   const editClick = form.querySelector(".edit-form").cloneNode(true);
+//   overlay.append(editClick);
+//   editClick.querySelector(".edit-form__title").textContent = "Edit profile";
+//   editClick.querySelector(".edit-form__input_name").value = nameText.textContent;
+//   editClick.querySelector(".edit-form__input_about").value = aboutText.textContent;
+//   editClick.querySelector(".edit-form__btn").textContent = "Save";
+//   editClick.querySelector(".edit-form__btn").addEventListener("click", function (evt) {
+//     evt.preventDefault();
+//     if (editClick.querySelector(".edit-form__input_name").value == "" || editClick.querySelector(".edit-form__input_about").value == "") {
+//       alert("Please, insert valid information.")
+//     } else {
+//       nameText.textContent = editClick.querySelector(".edit-form__input_name").value;
+//       aboutText.textContent = editClick.querySelector(".edit-form__input_about").value;
+//       overlayToggle()
+//       setTimeout(function () {
+//         editClick.remove();
+//       }, 700);
+//     }
+//   });
+// });
 
 // ADDING CARD
 
-addBtn.addEventListener("click", function () {
-  const addClick = overlay.cloneNode(true);
-  page.append(addClick);
-  addClick.classList.add("overlay_popup");
-  addClick.querySelector(".edit-form__title").textContent = "New Place";
-  addClick.querySelector(".edit-form__input_name").placeholder = "Title";
-  addClick.querySelector(".edit-form__input_about").placeholder = "Image URL";
-  addClick.querySelector(".edit-form__btn").textContent = "Create";
-  addClick.querySelector(".edit-form__btn").addEventListener("click", function (evt) {
-    evt.preventDefault();
-    if (addClick.querySelector(".edit-form__input_about").value !== "" && addClick.querySelector(".edit-form__input_name").value !== "") {
-      const newCard = element.cloneNode(true);
-      elementSection.prepend(newCard);
-      newCard.querySelector(".element__image").src = addClick.querySelector(".edit-form__input_about").value;
-      newCard.querySelector(".element__image").alt = `Picture of ${addClick.querySelector(".edit-form__input_name").value}`;
-      newCard.querySelector(".element__title").textContent = addClick.querySelector(".edit-form__input_name").value;
-      addClick.style.visibility = "0";
-      addClick.style.opacity = "0";
-      addClick.style.transition = "all 0.5s";
-      setTimeout(function () {
-        addClick.remove();
-      }, 700);
-    } else {
-      alert("Please, insert valid information.")
-    }
-  });
-});
+// addBtn.addEventListener("click", function () {
+//   const addClick = overlay.cloneNode(true);
+//   page.append(addClick);
+//   addClick.classList.add("overlay_popup");
+//   addClick.querySelector(".edit-form__title").textContent = "New Place";
+//   addClick.querySelector(".edit-form__input_name").placeholder = "Title";
+//   addClick.querySelector(".edit-form__input_about").placeholder = "Image URL";
+//   addClick.querySelector(".edit-form__btn").textContent = "Create";
+//   addClick.querySelector(".edit-form__btn").addEventListener("click", function (evt) {
+//     evt.preventDefault();
+//     if (addClick.querySelector(".edit-form__input_about").value !== "" && addClick.querySelector(".edit-form__input_name").value !== "") {
+//       const newCard = element.cloneNode(true);
+//       elementSection.prepend(newCard);
+//       newCard.querySelector(".element__image").src = addClick.querySelector(".edit-form__input_about").value;
+//       newCard.querySelector(".element__image").alt = `Picture of ${addClick.querySelector(".edit-form__input_name").value}`;
+//       newCard.querySelector(".element__title").textContent = addClick.querySelector(".edit-form__input_name").value;
+//       addClick.style.visibility = "0";
+//       addClick.style.opacity = "0";
+//       addClick.style.transition = "all 0.5s";
+//       setTimeout(function () {
+//         addClick.remove();
+//       }, 700);
+//     } else {
+//       alert("Please, insert valid information.")
+//     }
+//   });
+// });
 
 // LIKE BTN
 page.addEventListener("click", function (event) {
