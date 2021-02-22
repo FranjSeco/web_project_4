@@ -24,9 +24,12 @@ page.addEventListener("click", function (event) {
   if (event.target.tagName == "BUTTON" && event.target.classList.contains("close-icon")) {
     overlayToggle()
     setTimeout(function () {
-      while (overlay.firstChild) {
-        overlay.removeChild(overlay.firstChild);
+      if (overlay.querySelector(".image-popup")) {
+        overlay.querySelector(".image-popup").remove();
+      } else if (overlay.querySelector(".edit-form")) {
+        overlay.querySelector(".edit-form").remove();
       }
+
     }, 700);
   }
 });
@@ -206,16 +209,16 @@ page.addEventListener("click", function (event) {
 page.addEventListener("click", function (event) {
   if (event.target.tagName == "IMG" && event.target.classList.contains("element__image")) {
     overlayToggle();
-    const image = element.querySelector(".element__image");
-    const imagePopup = form.querySelector(".image-popup");
-    const imagePic = form.querySelector(".image-popup__picture");
-    const imageFig = form.querySelector(".image-popup__caption");
+    const imagePopup = form.querySelector(".image-popup").cloneNode(true);
     imagePopup.style.display = "flex";
+    overlay.append(imagePopup);
+    const image = element.querySelector(".element__image");
+    const imagePic = imagePopup.querySelector(".image-popup__picture");
+    const imageFig = imagePopup.querySelector(".image-popup__caption");
     imagePic.style.display = "flex";
     imagePic.src = event.target.src;
     imagePic.alt = event.target.alt;
     imageFig.textContent = event.target.alt;
-    overlay.append(imagePopup);
 
   }
 });
