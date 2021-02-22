@@ -1,5 +1,4 @@
 //VARIABLES
-const page = document.querySelector(".page");
 const overlay = document.querySelector("#overlay");
 
 const editBtn = document.querySelector(".profile__info-btn");
@@ -20,6 +19,7 @@ const modalProfile = overlay.querySelector(".edit-form");
 // FUNCTIONS
 function overlayToggle() {
   overlay.classList.toggle("overlay_popup");
+  console.log("HEY");
 }
 
 function imageToggle() {
@@ -41,16 +41,19 @@ function imageFormToggle() {
 }
 
 // EVENT LISTENER CLOSE ICON
-page.addEventListener("click", function (event) {
-  if (event.target.tagName == "BUTTON" && event.target.classList.contains("close-icon")) {
+
+overlay.addEventListener("click", function (event) {
+  if (event.target.classList.contains("close-icon")) {
     overlayToggle()
     imageToggle()
     formToggle()
     imageFormToggle()
   }
 });
+
 // PROFILE: NAME AND PROFESSION
-profileEdit.addEventListener("click", function () {
+profileEdit.addEventListener("click", function (evt) {
+  evt.preventDefault();
   const nameText = document.querySelector(".profile__info-title");
   const aboutText = document.querySelector(".profile__info-about");
   overlayToggle()
@@ -75,7 +78,8 @@ profileEdit.addEventListener("click", function () {
 
   // ADDING CARD
   const addPlace = document.querySelector(".profile__add-btn");
-  addPlace.addEventListener("click", function() {
+  addPlace.addEventListener("click", function(evt) {
+    evt.preventDefault();
     overlayToggle();
     imageForm.classList.toggle("image-form_on");
     modal.querySelector(".image-form__title").textContent = "New Place";
@@ -87,19 +91,31 @@ profileEdit.addEventListener("click", function () {
     modal.querySelector(".image-form__btn").addEventListener("click", function (evt) {
       evt.preventDefault();
       if (modal.querySelector(".image-form__input_about").value !== "" && modal.querySelector(".image-form__input_name").value !== "") {
+        overlayToggle();
+        imageFormToggle()
         const newCard = element.cloneNode(true);
         elementSection.prepend(newCard);
         newCard.querySelector(".element__image").src = modal.querySelector(".image-form__input_about").value;
         newCard.querySelector(".element__image").alt = `Picture of ${modal.querySelector(".image-form__input_name").value}`;
         newCard.querySelector(".element__title").textContent = modal.querySelector(".image-form__input_name").value;
-        overlayToggle();
-        imageFormToggle()
       } else {
         alert("Please, insert valid information.")
       }
     });
   });
 
+// PICTURE POPUP
+elementSection.addEventListener("click", function (event) {
+  if (event.target.classList.contains("element__image")) {
+    overlayToggle();
+    const imageOn = overlay.querySelector(".image-popup").classList.toggle("image-popup_on");
+    const imagePic = overlay.querySelector(".image-popup__picture");
+    const imageFig = overlay.querySelector(".image-popup__caption");
+    imagePic.src = event.target.src;
+    imagePic.alt = event.target.alt;
+    imageFig.textContent = event.target.alt;
+  }
+});
 
 
 
@@ -139,14 +155,6 @@ initialCards.forEach(item => {
   elementSection.append(cloneCard);
 });
 
-// PROFILE: NAME AND PROFESSION
-
-
-
-// ADDING CARD
-
-
-
 // LIKE BTN
 elementSection.addEventListener("click", function (event) {
   if (event.target.classList.contains("element__like-btn")) {
@@ -155,23 +163,11 @@ elementSection.addEventListener("click", function (event) {
 });
 
 // TRASH BTN
-page.addEventListener("click", function (event) {
+elementSection.addEventListener("click", function (event) {
   if (event.target.tagName == "BUTTON" && event.target.classList.contains("element__trash")) {
     const del = event.target.closest(".element");
     del.remove();
   }
 });
 
-// PICTURE POPUP
-elementSection.addEventListener("click", function (event) {
-  if (event.target.classList.contains("element__image")) {
-    overlayToggle();
-    const imageOn = overlay.querySelector(".image-popup").classList.toggle("image-popup_on");
-    const imagePic = overlay.querySelector(".image-popup__picture");
-    const imageFig = overlay.querySelector(".image-popup__caption");
-    imagePic.src = event.target.src;
-    imagePic.alt = event.target.alt;
-    imageFig.textContent = event.target.alt;
-  }
-});
 
