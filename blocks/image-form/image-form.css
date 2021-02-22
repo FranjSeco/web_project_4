@@ -1,10 +1,10 @@
-@import url("./__form/edit-form__form.css");
-@import url("./__title/edit-form__title.css");
-@import url("./__btn/edit-form__btn.css");
-@import url("./__input/edit-form__input.css");
+@import url("./__form/image-form__form.css");
+@import url("./__title/image-form__title.css");
+@import url("./__btn/image-form__btn.css");
+@import url("./__input/image-form__input.css");
 
 
-.edit-form {
+.image-form {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -22,13 +22,13 @@
 
 
 @media (max-width: 530px) {
-  .edit-form {
+  .image-form {
     width: 300px;
   }
 }
 
 @media (max-width: 320px) {
-  .edit-form {
+  .image-form {
     width: 282px;
   }
 }
