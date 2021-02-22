@@ -24,7 +24,9 @@ page.addEventListener("click", function (event) {
   if (event.target.tagName == "BUTTON" && event.target.classList.contains("close-icon")) {
     overlayToggle()
     setTimeout(function () {
-      overlay.querySelector(".edit-form").remove();
+      while (overlay.firstChild) {
+        overlay.removeChild(overlay.firstChild);
+      }
     }, 700);
   }
 });
@@ -74,6 +76,7 @@ page.addEventListener("click", function (event) {
         addClick.style.visibility = "0";
         addClick.style.opacity = "0";
         addClick.style.transition = "all 0.5s";
+        overlayToggle();
         setTimeout(function () {
           addClick.remove();
         }, 700);
@@ -202,16 +205,18 @@ page.addEventListener("click", function (event) {
 // PICTURE POPUP
 page.addEventListener("click", function (event) {
   if (event.target.tagName == "IMG" && event.target.classList.contains("element__image")) {
-    const imageClick = overlay.cloneNode(true);
-    page.append(imageClick);
-    imageClick.classList.add("overlay_popup");
-    imageClick.querySelector(".edit-form").style.display = "none";
-    imageClick.querySelector(".image-popup").style.display = "flex";
-    const imagePop = imageClick.querySelector(".image-popup__picture");
-    imagePop.style.display = "flex";
-    imagePop.src = event.target.src;
-    imagePop.alt = event.target.alt;
-    imageClick.querySelector(".image-popup__caption").textContent = event.target.alt;
+    overlayToggle();
+    const image = element.querySelector(".element__image");
+    const imagePopup = form.querySelector(".image-popup");
+    const imagePic = form.querySelector(".image-popup__picture");
+    const imageFig = form.querySelector(".image-popup__caption");
+    imagePopup.style.display = "flex";
+    imagePic.style.display = "flex";
+    imagePic.src = event.target.src;
+    imagePic.alt = event.target.alt;
+    imageFig.textContent = event.target.alt;
+    overlay.append(imagePopup);
+
   }
 });
 
