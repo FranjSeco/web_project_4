@@ -30,23 +30,42 @@ const profileEdit = document.querySelector(".profile__info-btn");
 const formImageSubmit = overlay.querySelector(".image-form__form");
 const formProfileSubmit = overlay.querySelector(".edit-form__form");
 
+const closeImage = imagePopupModal.querySelector(".close-icon");
+const closeProfileForm = profileFormModal.querySelector(".close-icon");
+const closeImageForm = imageFormModal.querySelector(".close-icon");
+
 
 // FUNCTIONS
 function cardMaker(card) {
   const cardElement = cardTemplate.querySelector(".element");
   const cloneCard = cardElement.cloneNode(true);
-
   const cardDeleteButton = cloneCard.querySelector('.element__trash');
   const cardImage = cloneCard.querySelector(".element__image");
   const cardName = cloneCard.querySelector(".element__title");
   const cardLike = cloneCard.querySelector(".element__like-btn");
 
+  // DELETE BUTTON
   cardDeleteButton.addEventListener("click", function (event) {
     event.target.closest(".element").remove(cloneCard);
   });
 
+  // LIKE BUTTON
   cardLike.addEventListener("click", function (event) {
     event.target.classList.toggle("element__like-black")
+  });
+
+  // PICTURE POPUP
+  cardImage.addEventListener("click", function (event) {
+    overlayOn();
+    imageOn();
+    imagePic.src = event.target.src;
+    imagePic.alt = event.target.alt;
+    imageFig.textContent = event.target.alt;
+  });
+
+  closeImage.addEventListener("click", function () {
+    overlayOff();
+    imageOff();
   });
 
   return cloneCard;
@@ -119,15 +138,6 @@ initialCards.forEach(card => {
 
 });
 
-// CLOSE ICON
-overlay.addEventListener("click", function (event) {
-  if (event.target.classList.contains("close-icon")) {
-    overlayOff();
-    imageOff();
-    editFormOff();
-    imageFormOff();
-  }
-});
 
 // PROFILE: NAME AND PROFESSION
 profileEdit.addEventListener("click", function () {
@@ -138,6 +148,7 @@ profileEdit.addEventListener("click", function () {
 });
 
 
+
 formProfileSubmit.addEventListener("submit", function (evt) {
   evt.preventDefault();
   nameText.textContent = formProfileName.value;
@@ -146,11 +157,10 @@ formProfileSubmit.addEventListener("submit", function (evt) {
   editFormOff();
 });
 
-profileFormModal.addEventListener("click", function (event) {
-  if (event.target.classList.contains("close-icon")) {
-    overlayOff();
-    editFormOff();
-  }
+
+closeProfileForm.addEventListener("click", function (event) {
+  overlayOff();
+  editFormOff();
 });
 
 // ADDING CARD
@@ -173,30 +183,11 @@ formImageSubmit.addEventListener("submit", function (evt) {
   newCard.querySelector(".element__title").textContent = formImageName.value;
 });
 
-imageFormModal.addEventListener("click", function (event) {
+
+closeImageForm.addEventListener("click", function (event) {
   if (event.target.classList.contains("close-icon")) {
     overlayOff();
     imageFormOff();
-  }
-});
-
-
-// PICTURE POPUP
-cardWrapper.addEventListener("click", function (event) {
-  if (event.target.classList.contains("element__image")) {
-    overlayOn();
-    imageOn();
-
-    imagePic.src = event.target.src;
-    imagePic.alt = event.target.alt;
-    imageFig.textContent = event.target.alt;
-  }
-});
-
-imagePopupModal.addEventListener("click", function (event) {
-  if (event.target.classList.contains("close-icon")) {
-    overlayOff();
-    imageOff();
   }
 });
 
