@@ -1,4 +1,6 @@
 //VARIABLES
+const cardTemplate = document.querySelector("#el-template").content;
+const cardWrapper = document.querySelector(".elements");
 const overlay = document.querySelector("#overlay");
 const closeIcon = overlay.querySelector(".close-icon");
 const imagePopupModal = overlay.querySelector(".image-popup");
@@ -10,9 +12,9 @@ const addBtn = document.querySelector(".profile__add-btn");
 const nameText = document.querySelector(".profile__info-title");
 const aboutText = document.querySelector(".profile__info-about");
 
-const cards = document.querySelector("#el-template").content;
 
-const elementSection = document.querySelector(".elements");
+
+
 const formImageName = imageFormModal.querySelector(".image-form__input_name");
 const formImageLink = imageFormModal.querySelector(".image-form__input_about");
 
@@ -23,21 +25,29 @@ const formProfileBtn = profileFormModal.querySelector(".edit-form__btn")
 const imagePic = imagePopupModal.querySelector(".image-popup__picture");
 const imageFig = imagePopupModal.querySelector(".image-popup__caption");
 
-
-
 const addPlace = document.querySelector(".profile__add-btn");
 const profileEdit = document.querySelector(".profile__info-btn");
 const formImageSubmit = overlay.querySelector(".image-form__form");
 const formProfileSubmit = overlay.querySelector(".edit-form__form");
 
+
 // FUNCTIONS
-function cardCreation(card) {
-  const cardElement = cards.querySelector(".element");
+function cardMaker(card) {
+  const cardElement = cardTemplate.querySelector(".element");
   const cloneCard = cardElement.cloneNode(true);
 
+  const cardDeleteButton = cloneCard.querySelector('.element__trash');
   const cardImage = cloneCard.querySelector(".element__image");
   const cardName = cloneCard.querySelector(".element__title");
-  const cardLike = cloneCard.querySelector("element__like-btn");
+  const cardLike = cloneCard.querySelector(".element__like-btn");
+
+  cardDeleteButton.addEventListener("click", function (event) {
+    event.target.closest(".element").remove(cloneCard);
+  });
+
+  cardLike.addEventListener("click", function (event) {
+    event.target.classList.toggle("element__like-black")
+  });
 
   return cloneCard;
 }
@@ -101,8 +111,8 @@ const initialCards = [
 ];
 
 initialCards.forEach(card => {
-  const cardItems = cardCreation(card);
-  elementSection.append(cardItems);
+  const cardItems = cardMaker(card);
+  cardWrapper.append(cardItems);
   cardItems.querySelector(".element__image").src = card.link;
   cardItems.querySelector(".element__image").alt = `Picture of ${card.name}`;
   cardItems.querySelector(".element__title").textContent = card.name;
@@ -120,8 +130,6 @@ overlay.addEventListener("click", function (event) {
 });
 
 // PROFILE: NAME AND PROFESSION
-
-
 profileEdit.addEventListener("click", function () {
   overlayOn();
   editFormOn();
@@ -153,13 +161,12 @@ addPlace.addEventListener("click", function () {
   formImageLink.value = "";
 });
 
-
 formImageSubmit.addEventListener("submit", function (evt) {
   evt.preventDefault();
   overlayOff();
   imageFormOff();
-  const newCard = cardCreation();
-  elementSection.prepend(newCard);
+  const newCard = cardMaker();
+  cardWrapper.prepend(newCard);
   evt.stopImmediatePropagation();
   newCard.querySelector(".element__image").src = formImageLink.value;
   newCard.querySelector(".element__image").alt = `Picture of ${formImageName.value}`;
@@ -175,7 +182,7 @@ imageFormModal.addEventListener("click", function (event) {
 
 
 // PICTURE POPUP
-elementSection.addEventListener("click", function (event) {
+cardWrapper.addEventListener("click", function (event) {
   if (event.target.classList.contains("element__image")) {
     overlayOn();
     imageOn();
@@ -194,19 +201,6 @@ imagePopupModal.addEventListener("click", function (event) {
 });
 
 
-// LIKE BTN
-elementSection.addEventListener("click", function (event) {
-  if (event.target.classList.contains("element__like-btn")) {
-    event.target.classList.toggle("element__like-black");
-  };
-});
 
-// TRASH BTN
-elementSection.addEventListener("click", function (event) {
-  if (event.target.tagName == "BUTTON" && event.target.classList.contains("element__trash")) {
-    const del = event.target.closest(".element");
-    del.remove();
-  }
-});
 
 
