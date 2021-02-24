@@ -1,3 +1,30 @@
+// CARD TEMPLATE
+const initialCards = [
+  {
+    name: "Yosemite Valley",
+    link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
+  },
+  {
+    name: "Lake Louise",
+    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
+  },
+  {
+    name: "Bald Mountains",
+    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
+  },
+  {
+    name: "Latemar",
+    link: "https://code.s3.yandex.net/web-code/latemar.jpg"
+  },
+  {
+    name: "Vanoise National Park",
+    link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://code.s3.yandex.net/web-code/lago.jpg"
+  }
+];
 //VARIABLES
 const cardTemplate = document.querySelector("#el-template").content;
 const cardWrapper = document.querySelector(".elements");
@@ -43,6 +70,9 @@ function cardMaker(card) {
   const cardImage = cloneCard.querySelector(".element__image");
   const cardName = cloneCard.querySelector(".element__title");
   const cardLike = cloneCard.querySelector(".element__like-btn");
+  cardImage.src = card.link;
+  cardImage.alt = `Picture of ${card.name}`;
+  cardName.textContent = card.name;
 
 
   // LIKE BUTTON
@@ -63,7 +93,6 @@ function cardMaker(card) {
     event.target.closest(".element").remove(cloneCard);
   });
 
-
   return cloneCard;
 }
 
@@ -72,42 +101,9 @@ function toggleModalWindow(modalWindow) {
   overlay.classList.toggle("overlay_popup");
 }
 
-
-// CARD TEMPLATE
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
-  },
-  {
-    name: "Lake Louise",
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
-  },
-  {
-    name: "Latemar",
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg"
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://code.s3.yandex.net/web-code/lago.jpg"
-  }
-];
-
 initialCards.forEach(card => {
   const cardItems = cardMaker(card);
   cardWrapper.append(cardItems);
-
-  cardItems.querySelector(".element__image").src = card.link;
-  cardItems.querySelector(".element__image").alt = `Picture of ${card.name}`;
-  cardItems.querySelector(".element__title").textContent = card.name;
 });
 
 
@@ -145,12 +141,12 @@ addPlace.addEventListener("click", function () {
 formImageSubmit.addEventListener("submit", function (evt) {
   evt.preventDefault();
   toggleModalWindow(imageFormModal);
-  const newCard = cardMaker();
+  const newCard = cardMaker({
+    name:  formImageName.value,
+    link: formImageLink.value
+  });
   cardWrapper.prepend(newCard);
-  evt.stopImmediatePropagation();
-  newCard.querySelector(".element__image").src = formImageLink.value;
-  newCard.querySelector(".element__image").alt = `Picture of ${formImageName.value}`;
-  newCard.querySelector(".element__title").textContent = formImageName.value;
+
 });
 
 closeImageForm.addEventListener("click", function (event) {
