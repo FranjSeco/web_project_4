@@ -25,6 +25,7 @@ const initialCards = [
     link: "https://code.s3.yandex.net/web-code/lago.jpg"
   }
 ];
+
 //VARIABLES
 const cardTemplate = document.querySelector("#el-template").content;
 const cardWrapper = document.querySelector(".elements");
@@ -58,8 +59,6 @@ const formProfileSubmit = overlay.querySelector(".edit-form__form");
 const closeImage = imagePopupModal.querySelector(".close-icon");
 const closeProfileForm = profileFormModal.querySelector(".close-icon");
 const closeImageForm = imageFormModal.querySelector(".close-icon");
-
-
 
 // FUNCTIONS
 function cardMaker(card) {
@@ -95,22 +94,11 @@ function cardMaker(card) {
   return cloneCard;
 }
 
+// OPEN/CLOSING POPUPS
 function toggleModalWindow(modalWindow) {
   modalWindow.classList.toggle("popup_opened");
   overlay.classList.toggle("overlay_popup");
 }
-
-initialCards.forEach(card => {
-  const cardItems = cardMaker(card);
-  cardWrapper.append(cardItems);
-});
-
-
-// CLOSE IMAGE
-closeImage.addEventListener("click", function () {
-  toggleModalWindow(imagePopupModal);
-});
-
 
 // PROFILE: NAME AND PROFESSION
 profileEdit.addEventListener("click", function () {
@@ -123,10 +111,6 @@ formProfileSubmit.addEventListener("submit", function (evt) {
   evt.preventDefault();
   nameText.textContent = formProfileName.value;
   aboutText.textContent = formProfileAbout.value;
-  toggleModalWindow(profileFormModal);
-});
-
-closeProfileForm.addEventListener("click", function (event) {
   toggleModalWindow(profileFormModal);
 });
 
@@ -148,6 +132,21 @@ formImageSubmit.addEventListener("submit", function (evt) {
 
 });
 
+// CLOSE BUTTONS
+closeImage.addEventListener("click", function () {
+  toggleModalWindow(imagePopupModal);
+});
+
+closeProfileForm.addEventListener("click", function (event) {
+  toggleModalWindow(profileFormModal);
+});
+
 closeImageForm.addEventListener("click", function (event) {
   toggleModalWindow(imageFormModal);
+});
+
+// INITIAL CARDS
+initialCards.forEach(card => {
+  const cardItems = cardMaker(card);
+  cardWrapper.append(cardItems);
 });
