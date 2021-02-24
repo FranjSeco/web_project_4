@@ -74,7 +74,6 @@ function cardMaker(card) {
   cardImage.alt = `Picture of ${card.name}`;
   cardName.textContent = card.name;
 
-
   // LIKE BUTTON
   cardLike.addEventListener("click", function (event) {
     event.target.classList.toggle("element__like-black")
@@ -89,8 +88,8 @@ function cardMaker(card) {
   });
 
   // DELETE BUTTON
-  cardDeleteButton.addEventListener("click", function (event) {
-    event.target.closest(".element").remove(cloneCard);
+  cardDeleteButton.addEventListener("click", function () {
+    cloneCard.remove();
   });
 
   return cloneCard;
