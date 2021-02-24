@@ -18,8 +18,7 @@
 @import url("../blocks/image-popup/image-popup.css");
 
 @import url("../blocks/overlay/_popup/overlay_popup.css");
-@import url("../blocks/image-popup/_on/image-popup_on.css");
-@import url("../blocks/edit-form/_on/edit-form_on.css");
-@import url("../blocks/image-form/_on/image-form_on.css");
+
+@import url("../blocks/popup_opened/popup_opened.css");
 
 
