@@ -75,7 +75,7 @@ function cardMaker(card) {
 
   // LIKE BUTTON
   cardLike.addEventListener("click", function (event) {
-    event.target.classList.toggle("element__like-black")
+    event.target.classList.toggle("element__like-black");
   });
 
   // PICTURE POPUP
