@@ -37,6 +37,8 @@ const imageFormModal = overlay.querySelector(".image-form");
 const profileFormModal = overlay.querySelector(".edit-form");
 
 
+
+
 const editBtn = document.querySelector(".profile__info-btn");
 const addBtn = document.querySelector(".profile__add-btn");
 const nameText = document.querySelector(".profile__info-title");
@@ -97,9 +99,29 @@ function cardMaker(card) {
 
 // OPEN/CLOSING POPUPS
 function toggleModalWindow(modalWindow) {
-  modalWindow.classList.toggle("popup_opened");
   overlay.classList.toggle("overlay_popup");
+  modalWindow.classList.toggle("popup_opened");
+
 }
+
+// CLOSE BY CLICKING OVERLAY
+overlay.addEventListener("click", (evt) => {
+  if (evt.target.id === "overlay" && imagePopupModal.classList.contains("popup_opened")) {
+    toggleModalWindow(imagePopupModal);
+  } else if (evt.target.id === "overlay" && imageFormModal.classList.contains("popup_opened")) {
+    toggleModalWindow(imageFormModal);
+  } else if (evt.target.id === "overlay" && profileFormModal.classList.contains("popup_opened")) {
+    toggleModalWindow(profileFormModal);
+  }
+});
+
+// CLOSE BY ESC
+function escHandler(evt) {
+  console.log(evt.key);
+}
+
+overlay.addEventListener("keydown", escHandler);
+
 
 // PROFILE: NAME AND PROFESSION
 profileEdit.addEventListener("click", function () {
@@ -126,7 +148,7 @@ formImageSubmit.addEventListener("submit", function (evt) {
   evt.preventDefault();
   toggleModalWindow(imageFormModal);
   const newCard = cardMaker({
-    name:  formImageName.value,
+    name: formImageName.value,
     link: formImageLink.value
   });
   cardWrapper.prepend(newCard);
@@ -145,6 +167,8 @@ closeProfileForm.addEventListener("click", function (event) {
 closeImageForm.addEventListener("click", function (event) {
   toggleModalWindow(imageFormModal);
 });
+
+
 
 // INITIAL CARDS
 initialCards.forEach(card => {
@@ -185,26 +209,40 @@ const isValid = (formElement, formInput) => {
   }
 };
 
-formElement.addEventListener("submit", function(evt) {
+formElement.addEventListener("submit", function (evt) {
   evt.preventDefault();
 });
 
-// formInput.addEventListener("input", isValid);
+
 
 const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll(".form-input"));
-
+  const buttonElement = formElement.querySelector(".form-submit");
+  toggleButtonState(inputList, buttonElement);
   inputList.forEach((formInput) => {
     formInput.addEventListener("input", () => {
       isValid(formElement, formInput);
+      toggleButtonState(inputList, buttonElement);
     });
   });
 };
 
+const hasInvalidInput = (inputList) => {
+  return inputList.some((formInput) => {
+    return !formInput.validity.valid;
+  })
+};
+
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add("form-submit_inactive");
+  } else {
+    buttonElement.classList.remove("form-submit_inactive");
+  }
+};
+
 const enableValidation = () => {
   const formList = Array.from(document.querySelectorAll(".form"));
-
-
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
@@ -213,4 +251,13 @@ const enableValidation = () => {
   });
 };
 
-enableValidation();
+
+
+enableValidation({
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible"
+});
