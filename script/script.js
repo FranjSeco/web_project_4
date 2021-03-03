@@ -112,15 +112,21 @@ overlay.addEventListener("click", (evt) => {
     toggleModalWindow(imageFormModal);
   } else if (evt.target.id === "overlay" && profileFormModal.classList.contains("popup_opened")) {
     toggleModalWindow(profileFormModal);
-  }
+  };
 });
 
 // CLOSE BY ESC
-function escHandler(evt) {
-  console.log(evt.key);
-}
-
-overlay.addEventListener("keydown", escHandler);
+document.addEventListener("keydown", (evt) => {
+  if (overlay.classList.contains("overlay_popup") && evt.key === "Escape") {
+    if (imagePopupModal.classList.contains("popup_opened")) {
+      toggleModalWindow(imagePopupModal);
+    } else if (imageFormModal.classList.contains("popup_opened")) {
+      toggleModalWindow(imageFormModal);
+    } else if (profileFormModal.classList.contains("popup_opened")) {
+      toggleModalWindow(profileFormModal);
+    };
+  };
+});
 
 
 // PROFILE: NAME AND PROFESSION
@@ -180,10 +186,7 @@ initialCards.forEach(card => {
 
 
 // VALIDATION
-
-
 const formElement = document.querySelector(".form");
-
 const formInput = formElement.querySelector(".form-input");
 
 
@@ -212,7 +215,6 @@ const isValid = (formElement, formInput) => {
 formElement.addEventListener("submit", function (evt) {
   evt.preventDefault();
 });
-
 
 
 const setEventListeners = (formElement) => {
