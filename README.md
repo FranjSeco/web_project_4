@@ -1,3 +1,9 @@
+# Project 4: Around The U.S. v3.0 (JS Form Validation)
+
+### Overview
+
+Following with what we have learn in the current sprint, we have added validation to the forms within the page in order to improve the UX. Forms are now more readable and responsive.
+
 # Project 4: Around The U.S. v2.0 (Implementation of logic with JS)
 
 ### Overview
