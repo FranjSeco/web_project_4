@@ -54,26 +54,31 @@
         <img class="image-popup__picture" src="a.jpg" alt="image">
         <figcaption class="image-popup__caption"></figcaption>
       </div>
+
       <div class="edit-form">
         <button class="close-icon" type="button"> </button>
-        <form class="edit-form__form" name="myForm">
+        <form class="edit-form__form form" name="profileForm" novalidate>
           <h2 class="edit-form__title">Edit profile</h2>
-          <input class="edit-form__input edit-form__input_name" type="text" name="Name" value="" placeholder=""
-            required>
-          <input class="edit-form__input edit-form__input_about" type="text" name="About" value="" placeholder=""
-            required>
+          <input id="name-input" class="edit-form__input edit-form__input_name form-input" type="text" name="Name" value="" placeholder=""
+          minlength="2" maxlength="40" required>
+          <span id="name-input-error" class="form-input-error"></span>
+          <input id="about-input" class="edit-form__input edit-form__input_about form-input" type="text" name="About" value="" placeholder=""
+          minlength="2" maxlength="200" required>
+          <span id="about-input-error" class="form-input-error"></span>
           <button class="edit-form__btn" type="submit">Save</button>
         </form>
       </div>
 
       <div class="image-form">
         <button class="close-icon" type="button"></button>
-        <form class="image-form__form" name="myForm2">
+        <form class="image-form__form form" name="imageForm">
           <h2 class="image-form__title">New Place</h2>
-          <input class="image-form__input image-form__input_name" placeholder="Title" type="text" name="Name" value=""
-            required>
-          <input class="image-form__input image-form__input_about" placeholder="Image URL" type="url" name="Link"
+          <input id="image-input" class="image-form__input image-form__input_name form-input" placeholder="Title" type="text" name="Name" value=""
+          minlength="1" maxlength="30" required>
+          <span id="image-input-error" class="form-input-error"></span>
+          <input id="url-input" class="image-form__input image-form__input_about form-input" placeholder="Image URL" type="url" name="Link"
             value="" required>
+            <span id="url-input-error" class="form-input-error"></span>
           <button class="image-form__btn" type="submit">Create</button>
         </form>
       </div>

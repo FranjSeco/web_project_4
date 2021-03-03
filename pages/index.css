@@ -20,5 +20,7 @@
 @import url("../blocks/overlay/_popup/overlay_popup.css");
 
 @import url("../blocks/popup_opened/popup_opened.css");
+@import url("../blocks/form-input/_type_error/form-input_type_error.css");
+@import url("../blocks/form-input/error-active/form-input-error_active.css");
 
 
