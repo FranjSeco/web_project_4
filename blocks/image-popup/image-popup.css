@@ -3,7 +3,7 @@
 
 
 .image-popup {
-  display: none;
+  display: flex;
   z-index: 10000;
   position: fixed;
   top: 50%;
