@@ -1,9 +1,9 @@
 // VALIDATION
-const showInputError = (formElement, formInput, errorMessage) => {
+const showInputError = (formElement, formInput, settings, errorMessage) => {
   const formError = formElement.querySelector(`#${formInput.id}-error`);
   formInput.classList.add(settings.inputErrorClass);
   formError.textContent = errorMessage;
-  formError.classList.add(settings.inputErrorClass);
+  formError.classList.add(settings.errorClass);
 };
 
 const hideInputError = (formElement, formInput, settings) => {
@@ -16,30 +16,25 @@ const hideInputError = (formElement, formInput, settings) => {
 const isValid = (formElement, formInput, settings) => {
 
   if (!formInput.validity.valid) {
-    showInputError(formElement, formInput, formInput.validationMessage);
+    showInputError(formElement, formInput, settings, formInput.validationMessage);
   } else {
-    hideInputError(formElement, formInput);
+    hideInputError(formElement, formInput, settings);
   }
 };
-
-// formElement.addEventListener("submit", function (evt) {
-//   evt.preventDefault();
-// });
-
 
 const setEventListeners = (formElement, settings) => {
   const inputList = Array.from(formElement.querySelectorAll(settings.formInput));
   const buttonElement = formElement.querySelector(settings.submitButtonSelector);
-  toggleButtonState(inputList, buttonElement);
+  toggleButtonState(inputList, buttonElement, settings);
   inputList.forEach((formInput) => {
     formInput.addEventListener("input", () => {
-      isValid(formElement, formInput);
-      toggleButtonState(inputList, buttonElement);
+      isValid(formElement, formInput, settings);
+      toggleButtonState(inputList, buttonElement, settings);
     });
   });
 };
 
-const hasInvalidInput = (inputList, formInput, settings) => {
+const hasInvalidInput = (inputList) => {
   return inputList.some((formInput) => {
     return !formInput.validity.valid;
   })
@@ -48,7 +43,6 @@ const hasInvalidInput = (inputList, formInput, settings) => {
 const toggleButtonState = (inputList, submitButtonSelector, settings) => {
   if (hasInvalidInput(inputList, settings)) {
     submitButtonSelector.classList.add(settings.inactiveButtonClass);
-    console.log(settings.submitButtonSelector.classList);
   } else {
     submitButtonSelector.classList.remove(settings.inactiveButtonClass);
   }
