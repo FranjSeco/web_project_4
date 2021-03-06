@@ -13,7 +13,7 @@ const hideInputError = (formElement, formInput, settings) => {
   formError.textContent = "";
 };
 
-const isValid = (formElement, formInput) => {
+const isValid = (formElement, formInput, settings) => {
   if (!formInput.validity.valid) {
     showInputError(formElement, formInput, formInput.validationMessage);
   } else {
@@ -21,9 +21,9 @@ const isValid = (formElement, formInput) => {
   }
 };
 
-formElement.addEventListener("submit", function (evt) {
-  evt.preventDefault();
-});
+// formElement.addEventListener("submit", function (evt) {
+//   evt.preventDefault();
+// });
 
 
 const setEventListeners = (formElement, settings) => {
