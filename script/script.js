@@ -1,3 +1,6 @@
+import FormValidator from "./FormValidator.js";
+import Card from "./Card.js";
+
 // CARD TEMPLATE
 const initialCards = [
   {
@@ -30,14 +33,12 @@ const initialCards = [
 
 const cardTemplate = document.querySelector("#el-template").content;
 const cardWrapper = document.querySelector(".elements");
-const overlay = document.querySelector(".overlay");
+
 const popups = document.querySelectorAll('.overlay');
-const imageOverlay = document.querySelector("#imageOverlay");
+
 const profileFormOverlay = document.querySelector("#profileFormOverlay");
 const imageFormOverlay = document.querySelector("#imageFormOverlay");
 
-const editBtn = document.querySelector(".profile__info-btn");
-const addBtn = document.querySelector(".profile__add-btn");
 const nameText = document.querySelector(".profile__info-title");
 const aboutText = document.querySelector(".profile__info-about");
 
@@ -46,8 +47,8 @@ const formImageLink = imageFormOverlay.querySelector(".image-form__input_about")
 
 const formProfileName = profileFormOverlay.querySelector(".edit-form__input_name");
 const formProfileAbout = profileFormOverlay.querySelector(".edit-form__input_about");
-const formProfileBtn = profileFormOverlay.querySelector(".edit-form__btn")
 
+const imageOverlay = document.querySelector("#imageOverlay");
 const imagePic = imageOverlay.querySelector(".image-popup__picture");
 const imageFig = imageOverlay.querySelector(".image-popup__caption");
 
@@ -56,9 +57,20 @@ const profileEdit = document.querySelector(".profile__info-btn");
 const formImageSubmit = imageFormOverlay.querySelector(".image-form__form");
 const formProfileSubmit = profileFormOverlay.querySelector(".edit-form__form");
 
-const closeImage = imageOverlay.querySelector(".close-icon");
-const closeProfileForm = profileFormOverlay.querySelector(".close-icon");
-const closeImageForm = imageFormOverlay.querySelector(".close-icon");
+const settings = {
+  formSelector: ".form",
+  inputSelector: ".form-input",
+  submitButtonSelector: ".form-submit",
+  spanElement: ".form-input-error",
+  inactiveButtonClass: "form-submit_inactive",
+  inputErrorClass: "form-input_type_error",
+  errorClass: "form-input-error_active"
+};
+
+
+const editFormValidator = new FormValidator(settings, document.querySelector(".edit-form"));
+const addFormValidator = new FormValidator(settings, document.querySelector(".image-form"));
+
 
 // FUNCTIONS
 function cardMaker(card) {
@@ -137,6 +149,12 @@ formProfileSubmit.addEventListener("submit", function (evt) {
   toggleModalWindow(profileFormOverlay);
 });
 
+// INITIAL CARDS
+initialCards.forEach(card => {
+  const cardItems = cardMaker(card);
+  cardWrapper.append(cardItems);
+});
+
 // ADDING CARD
 addPlace.addEventListener("click", function () {
   toggleModalWindow(imageFormOverlay);
@@ -144,19 +162,15 @@ addPlace.addEventListener("click", function () {
   formImageLink.value = "";
 });
 
-formImageSubmit.addEventListener("submit", function (evt) {
-  evt.preventDefault();
+const renderCard = (data) => {
+  // evt.preventDefault();
   toggleModalWindow(imageFormOverlay);
-  const newCard = cardMaker({
-    name: formImageName.value,
-    link: formImageLink.value
-  });
-  cardWrapper.prepend(newCard);
+  const newCard = new Card(imageFormOverlay, "#el-template");
+  cardWrapper.prepend(newCard.getCard());
+}
 
-});
+formImageSubmit.addEventListener("submit", renderCard);
 
-// INITIAL CARDS
-initialCards.forEach(card => {
-  const cardItems = cardMaker(card);
-  cardWrapper.append(cardItems);
-});
+// VALIDATION
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();

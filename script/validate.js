@@ -1,77 +1,59 @@
 // VALIDATION
-
-
-const showInputError = (settings, errorMessage) => {
-
-  const formInput = document.querySelector(settings.inputSelector);
-  const formElement = document.querySelector(settings.formSelector);
-
-  const formError = document.querySelector(settings.spanElement);
-  formInput.classList.add(settings.inputErrorClass);
+const showInputError = (formSelector, inputSelector, settings, errorMessage) => {
+  const formError = formSelector.querySelector(`#${inputSelector.id}-error`);
+  inputSelector.classList.add(settings.inputErrorClass);
   formError.textContent = errorMessage;
   formError.classList.add(settings.errorClass);
 };
 
-const hideInputError = (settings) => {
-  const formInput = document.querySelector(settings.inputSelector);
-  const formElement = document.querySelector(settings.formSelector);
-  const formError = formElement.querySelector(settings.spanElement);
-  formInput.classList.remove(settings.inputErrorClass);
-  formError.classList.remove(settings.inputErrorClass);
+const hideInputError = (formSelector, inputSelector, settings) => {
+  const formError = formSelector.querySelector(`#${inputSelector.id}-error`);
+  inputSelector.classList.remove(settings.inputErrorClass);
+  formError.classList.remove(settings.errorClass);
   formError.textContent = "";
 };
 
-const isValid = (formElement, formInput) => {
-  if (!formInput.validity.valid) {
-    showInputError(formElement, formInput, formInput.validationMessage);
+const isValid = (formSelector, inputSelector, settings) => {
+  if (!inputSelector.validity.valid) {
+    showInputError(formSelector, inputSelector, settings, inputSelector.validationMessage);
   } else {
-    hideInputError(formElement, formInput);
+    hideInputError(formSelector, inputSelector, settings);
   }
 };
 
-
-
-
-const setEventListeners = (settings) => {
-  const formInput = document.querySelector(settings.inputSelector);
-  const formElement = document.querySelector(settings.formSelector);
-  const inputList = Array.from(document.querySelectorAll(settings.inputSelector));
-  const buttonElement = document.querySelector(settings.submitButtonSelector);
-  toggleButtonState(inputList, buttonElement);
-  inputList.forEach((formInput) => {
-    formInput.addEventListener("input", () => {
-      isValid(formElement, formInput, settings);
+const setEventListeners = (formSelector, settings) => {
+  const inputList = Array.from(formSelector.querySelectorAll(settings.inputSelector));
+  const buttonElement = formSelector.querySelector(settings.submitButtonSelector);
+  toggleButtonState(inputList, buttonElement, settings);
+  inputList.forEach((inputSelector) => {
+    inputSelector.addEventListener("input", () => {
+      isValid(formSelector, inputSelector, settings);
       toggleButtonState(inputList, buttonElement, settings);
     });
-  });
-  formElement.addEventListener("submit", function (evt) {
-    evt.preventDefault();
   });
 };
 
 const hasInvalidInput = (inputList) => {
-  return inputList.some((formInput) => {
-    return !formInput.validity.valid;
+  return inputList.some((inputSelector) => {
+    return !inputSelector.validity.valid;
   })
 };
 
-const toggleButtonState = (inputList, buttonElement, settings) => {
-  const inactive = document.querySelector(settings.inactiveButtonClass);
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(inactive);
+const toggleButtonState = (inputList, submitButtonSelector, settings) => {
+  if (hasInvalidInput(inputList, settings)) {
+    submitButtonSelector.classList.add(settings.inactiveButtonClass);
   } else {
-    buttonElement.classList.remove(inactive);
+    submitButtonSelector.classList.remove(settings.inactiveButtonClass);
   }
 };
 
 const enableValidation = (settings) => {
-  const formElement = document.querySelector(settings.formSelector);
   const formList = Array.from(document.querySelectorAll(settings.formSelector));
-  formList.forEach((formElement) => {
-    formElement.addEventListener("submit", (evt) => {
+  formList.forEach((formSelector) => {
+    formSelector.addEventListener("submit", (evt) => {
       evt.preventDefault();
     });
-    setEventListeners(formElement, settings);
+    setEventListeners(formSelector, settings);
   });
 };
 

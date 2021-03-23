@@ -73,7 +73,7 @@
       <div class="image-form">
         <button class="close-icon" type="button"></button>
         <form class="image-form__form form" name="imageForm">
-          <h2 class="image-form__title">New Place</h2>
+          <h2 id="imageTitle" class="image-form__title">New Place</h2>
           <input id="image-input" class="image-form__input image-form__input_name form-input" placeholder="Title"
             type="text" name="Name" value="" minlength="1" maxlength="30" required>
           <span id="image-input-error" class="form-input-error"></span>
@@ -88,8 +88,12 @@
 
 
   </div>
-  <script src="./script/script.js"></script>
-  <script src="./script/validate.js"></script>
+  <script type="module" src="./script/script.js"></script>
+  <script type="module" src="./script/FormValidator.js"></script>
+  <script type="module" src="./script/Card.js"></script>
+
+
+</body>
 </body>
 
 </html>
