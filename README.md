@@ -1,3 +1,9 @@
+# Project 4: Around The U.S. v4.0 (JS Form Validation)
+
+### Overview
+
+Following with the OOP theory from the last sprint's theory, I have organize the functionality of my page through different modules that manage the validation and the adding card logic. Taking in consideration the OOP paradigm, the functionality has been built using modules, classes, inheritance, polymorphism and encapsulation properties.
+
 # Project 4: Around The U.S. v3.0 (JS Form Validation)
 
 ### Overview
