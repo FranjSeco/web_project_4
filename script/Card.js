@@ -61,9 +61,10 @@ class Card {
     this._cardImage = this._cloneCard.querySelector(".element__image");
     this._cardName = this._cloneCard.querySelector(".element__title");
 
+    this._card.id == "imageFormOverlay" ?
+    (this._cardImage.src = this._card.querySelector("#url-input").value, this._cardName.textContent = this._card.querySelector("#image-input").value) :
+    (this._cardImage.src = this._card.link, this._cardName.textContent = this._card.name);
 
-    this._cardImage.src = this._card.querySelector("#url-input").value;
-    this._cardName.textContent = this._card.querySelector("#image-input").value;
     this._cardImage.alt = `Picture of ${this._cardName.textContent}`;
 
     this._setEventListener();

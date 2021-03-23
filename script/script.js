@@ -31,7 +31,6 @@ const initialCards = [
 
 //VARIABLES
 
-const cardTemplate = document.querySelector("#el-template").content;
 const cardWrapper = document.querySelector(".elements");
 
 const popups = document.querySelectorAll('.overlay');
@@ -48,9 +47,6 @@ const formImageLink = imageFormOverlay.querySelector(".image-form__input_about")
 const formProfileName = profileFormOverlay.querySelector(".edit-form__input_name");
 const formProfileAbout = profileFormOverlay.querySelector(".edit-form__input_about");
 
-const imageOverlay = document.querySelector("#imageOverlay");
-const imagePic = imageOverlay.querySelector(".image-popup__picture");
-const imageFig = imageOverlay.querySelector(".image-popup__caption");
 
 const addPlace = document.querySelector(".profile__add-btn");
 const profileEdit = document.querySelector(".profile__info-btn");
@@ -71,40 +67,27 @@ const settings = {
 const editFormValidator = new FormValidator(settings, document.querySelector(".edit-form"));
 const addFormValidator = new FormValidator(settings, document.querySelector(".image-form"));
 
+// INITIAL CARDS
+initialCards.forEach((card)=> {
+  const newCard = new Card(card, "#el-template");
+  cardWrapper.append(newCard.getCard());
+});
 
-// FUNCTIONS
-function cardMaker(card) {
-  const cardElement = cardTemplate.querySelector(".element");
-  const cloneCard = cardElement.cloneNode(true);
-  const cardDeleteButton = cloneCard.querySelector('.element__trash');
+// ADDING CARD
+addPlace.addEventListener("click", function () {
+  toggleModalWindow(imageFormOverlay);
+  formImageName.value = "";
+  formImageLink.value = "";
+});
 
-  const cardImage = cloneCard.querySelector(".element__image");
-  const cardName = cloneCard.querySelector(".element__title");
-  const cardLike = cloneCard.querySelector(".element__like-btn");
-  cardImage.src = card.link;
-  cardImage.alt = `Picture of ${card.name}`;
-  cardName.textContent = card.name;
-
-  // LIKE BUTTON
-  cardLike.addEventListener("click", function (event) {
-    event.target.classList.toggle("element__like-black");
-  });
-
-  // PICTURE POPUP
-  cardImage.addEventListener("click", function (event) {
-    toggleModalWindow(imageOverlay);
-    imagePic.src = event.target.src;
-    imagePic.alt = event.target.alt;
-    imageFig.textContent = event.target.alt;
-  });
-
-  // DELETE BUTTON
-  cardDeleteButton.addEventListener("click", function () {
-    cloneCard.remove();
-  });
-
-  return cloneCard;
+const renderCard = (evt) => {
+  evt.preventDefault();
+  toggleModalWindow(imageFormOverlay);
+  const newCard = new Card(imageFormOverlay, "#el-template");
+  cardWrapper.prepend(newCard.getCard());
 }
+
+formImageSubmit.addEventListener("submit", renderCard);
 
 // OPEN/CLOSING POPUPS
 function toggleModalWindow(modal) {
@@ -149,27 +132,7 @@ formProfileSubmit.addEventListener("submit", function (evt) {
   toggleModalWindow(profileFormOverlay);
 });
 
-// INITIAL CARDS
-initialCards.forEach(card => {
-  const cardItems = cardMaker(card);
-  cardWrapper.append(cardItems);
-});
 
-// ADDING CARD
-addPlace.addEventListener("click", function () {
-  toggleModalWindow(imageFormOverlay);
-  formImageName.value = "";
-  formImageLink.value = "";
-});
-
-const renderCard = (data) => {
-  // evt.preventDefault();
-  toggleModalWindow(imageFormOverlay);
-  const newCard = new Card(imageFormOverlay, "#el-template");
-  cardWrapper.prepend(newCard.getCard());
-}
-
-formImageSubmit.addEventListener("submit", renderCard);
 
 // VALIDATION
 editFormValidator.enableValidation();
