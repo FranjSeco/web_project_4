@@ -63,7 +63,6 @@ const settings = {
   errorClass: "form-input-error_active"
 };
 
-
 const editFormValidator = new FormValidator(settings, document.querySelector(".edit-form"));
 const addFormValidator = new FormValidator(settings, document.querySelector(".image-form"));
 
@@ -83,7 +82,8 @@ addPlace.addEventListener("click", function () {
 const renderCard = (evt) => {
   evt.preventDefault();
   toggleModalWindow(imageFormOverlay);
-  const newCard = new Card(imageFormOverlay, "#el-template");
+  const cardData = imageFormOverlay.querySelector(".image-form__form");
+  const newCard = new Card(cardData, "#el-template");
   cardWrapper.prepend(newCard.getCard());
 }
 
