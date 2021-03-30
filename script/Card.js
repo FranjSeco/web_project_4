@@ -37,9 +37,9 @@ class Card {
 
   _handlePreviewPicture(event) {
     toggleModalWindow(imageOverlay);
-      imagePic.src = event.target.src;
-      imagePic.alt = event.target.alt;
-      imageFig.textContent = event.target.alt;
+    imagePic.src = event.target.src;
+    imagePic.alt = event.target.alt;
+    imageFig.textContent = event.target.alt;
   }
 
   _setEventListener() {
@@ -61,14 +61,14 @@ class Card {
     this._cardImage = this._cloneCard.querySelector(".element__image");
     this._cardName = this._cloneCard.querySelector(".element__title");
 
-    this._cardImage.src = (this._card.link) || (this._card.querySelector("#url-input").value);
-    this._cardName.textContent = (this._card.name) || (this._card.querySelector("#image-input").value);
+    this._cardImage.src = this._card.link;
+    this._cardName.textContent = this._card.name;
     this._cardImage.alt = `Picture of ${this._cardName.textContent}`;
 
     this._setEventListener();
 
     return this._cloneCard;
   }
-} //el-template
+}
 
 export default Card;

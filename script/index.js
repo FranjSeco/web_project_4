@@ -82,8 +82,12 @@ addPlace.addEventListener("click", function () {
 const renderCard = (evt) => {
   evt.preventDefault();
   toggleModalWindow(imageFormOverlay);
-  const cardData = imageFormOverlay.querySelector(".image-form__form");
-  const newCard = new Card(cardData, "#el-template");
+  const cardDataForm = imageFormOverlay.querySelector(".image-form__form");
+  const cardInfo = {
+    name: cardDataForm.elements.Name.value,
+    link: cardDataForm.elements.Link.value
+  }
+  const newCard = new Card(cardInfo, "#el-template");
   cardWrapper.prepend(newCard.getCard());
 }
 
