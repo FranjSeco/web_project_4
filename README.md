@@ -1,3 +1,9 @@
+# Project 4: Around The U.S. v5.0 (Webpack and file Structure/OOP)
+
+### Overview
+
+The new version of this project has been provided with webpack and a renewed file structure.
+
 # Project 4: Around The U.S. v4.0 (JS Form Validation)
 
 ### Overview

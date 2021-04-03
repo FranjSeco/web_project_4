@@ -1,0 +1,12 @@
+.element__like-btn {
+  width: 21px;
+  height: 19px;
+  background-color: #fff;
+  background-image: url("../../../../images/like.png");
+  cursor: pointer;
+  border: none;
+}
+
+.element__like-btn:hover {
+  opacity: .6;
+}
