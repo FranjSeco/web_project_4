@@ -14,6 +14,10 @@ class Section {
   addItem(element) {
     this._containerSelector.append(element);
   }
+
+  prependItems(element) {
+    this._containerSelector.prepend(element);
+  }
 }
 
 export default Section;

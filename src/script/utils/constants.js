@@ -27,14 +27,16 @@ const initialCards = [
 
 const cardWrapper = document.querySelector(".elements");
 
-const profileFormOverlay = document.querySelector("#profileFormOverlay");
+// const profileFormOverlay = document.querySelector("#profileFormOverlay");
 const imageFormOverlay = document.querySelector("#imageFormOverlay");
 
 const formImageName = imageFormOverlay.querySelector(".image-form__input_name");
 const formImageLink = imageFormOverlay.querySelector(".image-form__input_about");
 
-// const formProfileName = profileFormOverlay.querySelector(".edit-form__input_name");
-// const formProfileAbout = profileFormOverlay.querySelector(".edit-form__input_about");
+const currentName = document.querySelector(".edit-form__input_name");
+const currentJob = document.querySelector(".edit-form__input_about");
+// const name = document.querySelector(".profile__info-title");
+// const about = document.querySelector(".profile__info-about");
 
 const addPlace = document.querySelector(".profile__add-btn");
 const profileEdit = document.querySelector(".profile__info-btn");
@@ -54,5 +56,5 @@ const settings = {
 };
 
 
-export {cardElementSelector, initialCards, cardWrapper, profileFormOverlay, imageFormOverlay, formImageName, formImageLink, addPlace, profileEdit,
+export { imageFormOverlay, currentName, currentJob, cardElementSelector, initialCards, cardWrapper, formImageName, formImageLink, addPlace, profileEdit,
 formImageSubmit, formProfileSubmit, settings};
