@@ -35,24 +35,6 @@ const initialSetup = new Section({
 // INITIAL CARDS CALL
 initialSetup.renderer();
 
-// ADDING CARD FUNCTION
-// const renderCard = () => {
-//   // const cardDataForm = imageFormOverlay.querySelector(".image-form__form");
-//   // const cardInfo = [
-//   //   {
-//   //     name: cardDataForm.elements.Place.value,
-//   //     link: cardDataForm.elements.Link.value
-//   //   }
-//   // ];
-
-// }
-
-
-
-
-
-
-
 // ADDING CARD BTN EVENT LISTENER
 addPlace.addEventListener("click", function () {
   imageFormPopup.open();
@@ -64,9 +46,7 @@ profileEdit.addEventListener("click", function () {
   userInfo.getUserInfo();
 });
 
-
-
-// POPUPS
+// POPUP PROFILE FORM
 const editFormPopup = new PopupWithForm(
   "#profileFormOverlay", () => {
     userInfo.setUserInfo(currentName.value, currentJob.value);
@@ -75,6 +55,8 @@ const editFormPopup = new PopupWithForm(
 );
 editFormPopup.setEventListeners();
 
+
+// POPUP IMAGE FORM
 const imageFormPopup = new PopupWithForm(
   "#imageFormOverlay",
   (object) => {
@@ -104,6 +86,6 @@ const imageFormPopup = new PopupWithForm(
 
 imageFormPopup.setEventListeners();
 
-
+// POPUP IMAGE OVERVIEW
 const imageOverviewPopup = new PopupWithImage("#imageOverlay");
 imageOverviewPopup.setEventListeners();
