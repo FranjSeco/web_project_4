@@ -61,11 +61,10 @@ editFormPopup.setEventListeners();
 const imageFormPopup = new PopupWithForm(
   "#imageFormOverlay",
   (object) => {
-    console.log(object);
     const newCardPrepend = new Card(
       object,
       () => {
-        imageOverviewPopup.open(object[0], object[1]);
+        imageOverviewPopup.open(object.Place, object.Link);
       }
     );
     initialSetup.prependItem(newCardPrepend.getCard());
