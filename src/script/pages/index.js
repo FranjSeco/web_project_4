@@ -68,7 +68,6 @@ const imageFormPopup = new PopupWithForm(
       }
     );
     initialSetup.prependItem(newCardPrepend.getCard());
-    initialSetup.renderer();
     imageFormPopup.close();
   }
 );
