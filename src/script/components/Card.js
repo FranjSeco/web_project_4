@@ -1,7 +1,7 @@
 class Card {
   constructor(items, handleCardClick) {
-    this._cardTitle = items.name;
-    this._cardLink = items.link;
+    this._cardTitle = items.name || items.Place;
+    this._cardLink = items.link || items.Link;
     this._handleCardClick = handleCardClick;
   }
 

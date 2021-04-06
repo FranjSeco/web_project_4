@@ -7,9 +7,7 @@ class UserInfo {
   }
 
   getUserInfo() {
-    this._currentName.value = this._name.textContent;
-    this._currentJob.value = this._about.textContent;
-    return this._userInfo = { name: this._name.textContent, job: this._about.textContent };
+    return this.userInfo = { name: this._name.textContent, job: this._about.textContent };
   }
 
   setUserInfo(newName, newJob) {

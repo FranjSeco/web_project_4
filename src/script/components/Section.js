@@ -15,7 +15,7 @@ class Section {
     this._containerSelector.append(element);
   }
 
-  prependItems(element) {
+  prependItem(element) {
     this._containerSelector.prepend(element);
   }
 }

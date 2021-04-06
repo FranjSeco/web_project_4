@@ -14,9 +14,6 @@ const addFormValidator = new FormValidator(settings, document.querySelector(".im
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
-// USERINFO
-const userInfo = new UserInfo(".profile__info-title", ".profile__info-about", ".edit-form__input_name", ".edit-form__input_about");
-
 // INITIAL CARDS
 const initialSetup = new Section({
   items: initialCards, renderer: (cardItem) => {
@@ -40,46 +37,39 @@ addPlace.addEventListener("click", function () {
   imageFormPopup.open();
 });
 
+// USERINFO
+const userInfo = new UserInfo(".profile__info-title", ".profile__info-about", ".edit-form__input_name", ".edit-form__input_about");
+
 // PROFILE: NAME AND PROFESSION
 profileEdit.addEventListener("click", function () {
   editFormPopup.open();
-  userInfo.getUserInfo();
+  const getValues = userInfo.getUserInfo();
+  currentName.value = getValues.name;
+  currentJob.value = getValues.job;
 });
 
 // POPUP PROFILE FORM
 const editFormPopup = new PopupWithForm(
-  "#profileFormOverlay", () => {
-    userInfo.setUserInfo(currentName.value, currentJob.value);
+  "#profileFormOverlay", (object) => {
+    userInfo.setUserInfo(object.Name, object.About);
     editFormPopup.close();
   }
 );
 editFormPopup.setEventListeners();
 
-
 // POPUP IMAGE FORM
 const imageFormPopup = new PopupWithForm(
   "#imageFormOverlay",
   (object) => {
-    const cardInfo = [
-      {
-        name: object.Place,
-        link: object.Link
+    console.log(object);
+    const newCardPrepend = new Card(
+      object,
+      () => {
+        imageOverviewPopup.open(object[0], object[1]);
       }
-    ];
-    const prependCard = new Section({
-      items: cardInfo, renderer: (cardItem) => {
-        const newCardPrepend = new Card(
-          cardItem,
-          () => {
-            imageOverviewPopup.open(cardInfo[0].name, cardInfo[0].link);
-          }
-        );
-        prependCard.prependItems(newCardPrepend.getCard());
-      }
-    },
-      cardElementSelector
     );
-    prependCard.renderer();
+    initialSetup.prependItem(newCardPrepend.getCard());
+    initialSetup.renderer();
     imageFormPopup.close();
   }
 );
