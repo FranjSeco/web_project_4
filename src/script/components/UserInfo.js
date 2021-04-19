@@ -10,7 +10,7 @@ class UserInfo {
     return this.userInfo = { name: this._name.textContent, job: this._about.textContent };
   }
 
-  setUserInfo(newName, newJob) {
+  setUserInfo({newName, newJob}) {
     this._name.textContent = newName;
     this._about.textContent = newJob;
   }

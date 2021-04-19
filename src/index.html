@@ -17,11 +17,11 @@
         <div class="profile__avatar"></div>
         <div class="profile__info">
           <div class="profile__info-block">
-            <h1 class="profile__info-title">Jacques Cousteau</h1>
+            <h1 class="profile__info-title"></h1>
             <button class="profile__info-btn" type="button">
             </button>
           </div>
-          <p class="profile__info-about">Explorer</p>
+          <p class="profile__info-about"></p>
         </div>
         <button class="profile__add-btn" type="button">
         </button>
@@ -74,12 +74,23 @@
         <form class="image-form__form form" name="imageForm">
           <h2 id="imageTitle" class="image-form__title">New Place</h2>
           <input id="image-input" class="image-form__input image-form__input_name form-input" placeholder="Title"
-            type="text" name="Place" value="" minlength="1" maxlength="30" required>
+            type="text" name="name" value="" minlength="1" maxlength="30" required>
           <span id="image-input-error" class="form-input-error"></span>
           <input id="url-input" class="image-form__input image-form__input_about form-input" placeholder="Image URL"
-            type="url" name="Link" value="" required>
+            type="url" name="link" value="" required>
           <span id="url-input-error" class="form-input-error"></span>
           <button class="image-form__btn form-submit" type="submit">Create</button>
+        </form>
+      </div>
+
+    </div>
+
+    <div class="overlay" id="deleteFormOverlay">
+      <div class="delete-form">
+        <button class="close-icon" type="button"></button>
+        <form class="delete-form__form form" name="deleteForm">
+          <h2 id="deleteFormTitle" class="delete-form__title">Are you sure?</h2>
+          <button class="delete-form__btn form-submit" type="submit">Yes</button>
         </form>
       </div>
 
