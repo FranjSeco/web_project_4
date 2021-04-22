@@ -44,6 +44,9 @@ api.getInitialCards()
                     cardTrash.closest(".element").remove();
                     deleteFormPopup.close();
                   })
+                  .catch((err) => {
+                    console.log(err);
+                  })
               }
             );
             deleteFormPopup.setEventListeners();
@@ -60,6 +63,9 @@ api.getInitialCards()
                 .then(element => {
                   cardElement.updateLikes(element.likes);
                   cardElement.showLikes();
+                })
+                .catch((err) => {
+                  console.log(err);
                 })
             }
           }
@@ -93,6 +99,9 @@ api.getInitialCards()
                         cardTrash.closest(".element").remove();
                         deleteFormPopup.close();
                       })
+                      .catch((err) => {
+                        console.log(err);
+                      })
                   }
                 );
                 deleteFormPopup.open(cardID);
@@ -101,6 +110,9 @@ api.getInitialCards()
             );
             initialSetup.prependItem(newCardPrepend.getCard());
             renderLoading(false, imageBtn);
+          })
+          .catch((err) => {
+            console.log(err);
           })
           .finally(() => {
             imageFormPopup.close()
@@ -120,6 +132,9 @@ const userInfo = new UserInfo(".profile__info-title", ".profile__info-about", ".
 api.apiUserInfo()
   .then(res => {
     userInfo.setUserInfo({ newName: res.name, newJob: res.about, avatarSrc: res.avatar })
+  })
+  .catch((err) => {
+    console.log(err);
   })
 
 // PROFILE: NAME AND PROFESSION
@@ -141,6 +156,9 @@ const editFormPopup = new PopupWithForm(
         userInfo.setUserInfo({ newName: data.name, newJob: data.about, avatarSrc: avatarSource.avatar });
         renderLoading(false, profileBtn);
       })
+      .catch((err) => {
+        console.log(err);
+      })
       .finally(() => {
         editFormPopup.close()
       })
@@ -159,6 +177,12 @@ const avatarFormPopup = new PopupWithForm("#avatarFormOverlay",
             userInfo.setUserInfo({ newName: res.name, newJob: res.about, avatarSrc: res.avatar })
             renderLoading(false, avatarBtn);
           })
+          .catch((err) => {
+            console.log(err);
+          })
+      })
+      .catch((err) => {
+        console.log(err);
       })
       .finally(() => {
         avatarFormPopup.close()
