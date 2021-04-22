@@ -4,6 +4,8 @@
 @import url("./__like-btn/element__like-btn.css");
 @import url("./__trash/element__trash.css");
 @import url("./__like-black/element__like-black.css");
+@import url("./__like-counter/element__like-counter.css");
+@import url("./__like-container/element__like-container.css");
 
 
 .element {

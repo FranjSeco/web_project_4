@@ -1,3 +1,9 @@
+# Project 4: Around The U.S. v6.0 (Async JS and working with APIS)
+
+### Overview
+
+We have started working with server side development. Through an API we are able to submit and retrieve data from the server. From now on, our changes within the page will be save on the server side. Besides that, we have started implementing the Async programming.
+
 # Project 4: Around The U.S. v5.0 (Webpack and file Structure/OOP)
 
 ### Overview

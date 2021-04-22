@@ -15,7 +15,7 @@ class Api {
   }
 
   // GET https://around.nomoreparties.co/v1/groupId/users/me
-  getUserInfo() {
+  apiUserInfo() {
     return fetch(this._baseUrl + "/users/me", {
       headers: this._headers
     })
@@ -48,8 +48,8 @@ class Api {
   }
 
   // PATCH https://around.nomoreparties.co/v1/groupId/users/me
-  editProfile({name, about}) {
-    fetch(this._baseUrl + "/users/me", {
+  editProfile({ name, about }) {
+    return fetch(this._baseUrl + "/users/me", {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
@@ -57,9 +57,43 @@ class Api {
         about
       })
     })
+      .then(res => res.ok ? res.json() : Promise.reject(`Error!` +` `+ res.statusText))
+      .catch(err => console.log(err))
+  }
+
+  editAvatar(avatar) {
+      return fetch(this._baseUrl + '/users/me/avatar/', {
+          headers: this._headers,
+          method: "PATCH",
+          body: JSON.stringify({
+              avatar
+          })
+      })
+      .then(res => res.ok ? res.json() : Promise.reject('Error' + res.statusText))
+      .catch(err => console.log(err))
+  }
+
+  // PUT https://around.nomoreparties.co/v1/groupId/cards/likes/cardId
+  addLike(cardID) {
+    return fetch(this._baseUrl + "/cards/likes/" + cardID, {
+      headers: this._headers,
+      method: "PUT",
+    })
       .then(res => res.ok ? res.json() : Promise.reject(`Error!` + res.statusText))
       .catch(err => console.log(err))
   }
+
+  // DELETE https://around.nomoreparties.co/v1/groupId/cards/likes/cardId
+  removeLike(cardID) {
+    return fetch(this._baseUrl + "/cards/likes/" + cardID, {
+      headers: this._headers,
+      method: "DELETE",
+    })
+      .then(res => res.ok ? res.json() : Promise.reject(`Error!` + res.statusText))
+      .catch(err => console.log(err))
+  }
+
+
 }
 
 

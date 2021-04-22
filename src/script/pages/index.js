@@ -1,11 +1,12 @@
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
-import { currentName, currentJob, cardElementSelector, addPlace, profileEdit, settings } from "../utils/constants.js";
+import { avatarBtn, imageBtn, profileBtn, avatarEdit, currentName, currentJob, cardElementSelector, addPlace, profileEdit, settings } from "../utils/constants.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
+import renderLoading from "../utils/utils.js";
 import "../../styles/pages/index.css";
 
 
@@ -35,8 +36,32 @@ api.getInitialCards()
           () => {
             imageOverviewPopup.open(cardItem.name, cardItem.link);
           },
-          (cardID) => {
+          (cardID, cardTrash) => {
+            const deleteFormPopup = new PopupWithForm("#deleteFormOverlay",
+              (cardID) => {
+                api.removeCard(cardID)
+                  .then(() => {
+                    cardTrash.closest(".element").remove();
+                    deleteFormPopup.close();
+                  })
+              }
+            );
+            deleteFormPopup.setEventListeners();
             deleteFormPopup.open(cardID);
+          },
+          (cardElement, cardID) => {
+            if (cardElement.isLiked()) {
+              api.removeLike(cardID)
+                .then(element => {
+                  cardElement.updateLikes(element.likes)
+                })
+            } else {
+              api.addLike(cardID)
+                .then(element => {
+                  cardElement.updateLikes(element.likes);
+                  cardElement.showLikes();
+                })
+            }
           }
         );
         initialSetup.addItem(newCard.getCard());
@@ -46,56 +71,59 @@ api.getInitialCards()
     );
     initialSetup.renderer();
 
+    // FORM POPUP FOR ADDING IMAGES
     const imageFormPopup = new PopupWithForm(
       "#imageFormOverlay",
       (data) => {
+        renderLoading(true, imageBtn);
         api.addCard(data)
           .then((data) => {
             const newCardPrepend = new Card(
               data,
               () => {
                 imageOverviewPopup.open(data.name, data.link);
-              }
-              ,
-              (cardID) => {
+              },
+              (cardID, cardTrash) => {
+                // POPUP DELETE FORM
+                const deleteFormPopup = new PopupWithForm(
+                  "#deleteFormOverlay",
+                  (cardID) => {
+                    api.removeCard(cardID)
+                      .then(() => {
+                        cardTrash.closest(".element").remove();
+                        deleteFormPopup.close();
+                      })
+                  }
+                );
                 deleteFormPopup.open(cardID);
+                deleteFormPopup.setEventListeners();
               }
             );
             initialSetup.prependItem(newCardPrepend.getCard());
-            imageFormPopup.close();
-          });
-      }
-    );
-    addPlace.addEventListener("click", function () {
-      imageFormPopup.open();
-    });
-    imageFormPopup.setEventListeners();
-
-    // POPUP DELETE FORM
-    const deleteFormPopup = new PopupWithForm("#deleteFormOverlay",
-      (cardID) => {
-        api.removeCard(cardID)
-          .then(() => {
-            newCard.handleDeleteCard();
-            deleteFormPopup.close();
+            renderLoading(false, imageBtn);
+          })
+          .finally(() => {
+            imageFormPopup.close()
           })
       }
     );
-    deleteFormPopup.setEventListeners();
+    addPlace.addEventListener("click", () => {
+      imageFormPopup.open();
+    });
+    imageFormPopup.setEventListeners();
   });
 
-
-// USERINFO
-const userInfo = new UserInfo(".profile__info-title", ".profile__info-about", ".edit-form__input_name", ".edit-form__input_about");
+// USERINFO SELECTORS
+const userInfo = new UserInfo(".profile__info-title", ".profile__info-about", ".edit-form__input_name", ".edit-form__input_about", ".profile__avatar-image");
 
 // API FOR USERINFO
-api.getUserInfo()
+api.apiUserInfo()
   .then(res => {
-    userInfo.setUserInfo({ newName: res.name, newJob: res.about })
+    userInfo.setUserInfo({ newName: res.name, newJob: res.about, avatarSrc: res.avatar })
   })
 
 // PROFILE: NAME AND PROFESSION
-profileEdit.addEventListener("click", function () {
+profileEdit.addEventListener("click", () => {
   editFormPopup.open();
   const getValues = userInfo.getUserInfo();
   currentName.value = getValues.name;
@@ -103,17 +131,44 @@ profileEdit.addEventListener("click", function () {
 });
 
 // POPUP PROFILE FORM
-api.editProfile(data)
-.then((data) => {
-  const editFormPopup = new PopupWithForm(
-    "#profileFormOverlay", (data) => {
-      userInfo.setUserInfo(data.Name, data.About);
-      editFormPopup.close();
-    }
-  );
-  editFormPopup.setEventListeners();
-})
+const editFormPopup = new PopupWithForm(
+  "#profileFormOverlay", (data) => {
+    renderLoading(true, profileBtn);
+    // API FOR EDITING PROFILE
+    api.editProfile({ name: data.Name, about: data.About })
+      .then(data => {
+        const avatarSource = userInfo.getUserInfo();
+        userInfo.setUserInfo({ newName: data.name, newJob: data.about, avatarSrc: avatarSource.avatar });
+        renderLoading(false, profileBtn);
+      })
+      .finally(() => {
+        editFormPopup.close()
+      })
+  }
+);
+editFormPopup.setEventListeners();
 
+// POPUP AVATAR FORM
+const avatarFormPopup = new PopupWithForm("#avatarFormOverlay",
+  (data) => {
+    renderLoading(true, avatarBtn);
+    api.editAvatar(data.link)
+      .then(() => {
+        api.apiUserInfo()
+          .then((res) => {
+            userInfo.setUserInfo({ newName: res.name, newJob: res.about, avatarSrc: res.avatar })
+            renderLoading(false, avatarBtn);
+          })
+      })
+      .finally(() => {
+        avatarFormPopup.close()
+      })
+  })
+
+avatarFormPopup.setEventListeners();
+avatarEdit.addEventListener("click", () => {
+  avatarFormPopup.open()
+});
 
 // POPUP IMAGE OVERVIEW
 const imageOverviewPopup = new PopupWithImage("#imageOverlay");

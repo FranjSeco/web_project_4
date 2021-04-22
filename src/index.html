@@ -15,6 +15,8 @@
     <main class="main">
       <section class="profile">
         <div class="profile__avatar"></div>
+          <img class="profile__avatar-image" src="" alt="Profile Picture">
+
         <div class="profile__info">
           <div class="profile__info-block">
             <h1 class="profile__info-title"></h1>
@@ -34,7 +36,11 @@
             <button class="element__trash" type="button"></button>
             <div class="element__text">
               <h2 class="element__title"></h2>
-              <button class="element__like-btn" type="button"></button>
+              <div class="element__like-container">
+                <button class="element__like-btn" type="button"></button>
+                <p class="element__like-counter"></p>
+              </div>
+
             </div>
           </div>
         </template>
@@ -82,7 +88,6 @@
           <button class="image-form__btn form-submit" type="submit">Create</button>
         </form>
       </div>
-
     </div>
 
     <div class="overlay" id="deleteFormOverlay">
@@ -93,7 +98,19 @@
           <button class="delete-form__btn form-submit" type="submit">Yes</button>
         </form>
       </div>
+    </div>
 
+    <div class="overlay" id="avatarFormOverlay">
+      <div class="avatar-form">
+        <button class="close-icon" type="button"></button>
+        <form class="avatar-form__form form" name="avatarForm">
+          <h2 id="avatarTitle" class="image-form__title">Change profile picture?</h2>
+          <input id="url-input" class="avatar-form__input avatar-form__input_about form-input" placeholder="Avatar URL"
+            type="url" name="link" value="" required>
+          <span id="url-input-error" class="form-input-error"></span>
+          <button class="avatar-form__btn form-submit" type="submit">Save</button>
+        </form>
+      </div>
     </div>
 
 

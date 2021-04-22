@@ -5,6 +5,7 @@
   background-image: url("../../../../images/like.png");
   cursor: pointer;
   border: none;
+  margin: 0;
 }
 
 .element__like-btn:hover {
