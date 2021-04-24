@@ -17,7 +17,7 @@ editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
 
-// API
+/////////////// API ///////////////
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-7",
   headers: {
@@ -25,108 +25,6 @@ const api = new Api({
     "Content-Type": "application/json"
   }
 });
-
-// API FOR INITIALCARDS AND ADDING CARDS
-api.getInitialCards()
-  .then(res => {
-    const initialSetup = new Section({
-      items: res, renderer: (cardItem) => {
-        const newCard = new Card(
-          cardItem,
-          () => {
-            imageOverviewPopup.open(cardItem.name, cardItem.link);
-          },
-          (cardID, cardTrash) => {
-            const deleteFormPopup = new PopupWithForm("#deleteFormOverlay",
-              (cardID) => {
-                api.removeCard(cardID)
-                  .then(() => {
-                    cardTrash.closest(".element").remove();
-                    deleteFormPopup.close();
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                  })
-              }
-            );
-            deleteFormPopup.setEventListeners();
-            deleteFormPopup.open(cardID);
-          },
-          (cardElement, cardID) => {
-            if (cardElement.isLiked()) {
-              api.removeLike(cardID)
-                .then(element => {
-                  cardElement.updateLikes(element.likes)
-                })
-            } else {
-              api.addLike(cardID)
-                .then(element => {
-                  cardElement.updateLikes(element.likes);
-                  cardElement.showLikes();
-                })
-                .catch((err) => {
-                  console.log(err);
-                })
-            }
-          }
-        );
-        initialSetup.addItem(newCard.getCard());
-      }
-    },
-      cardElementSelector
-    );
-    initialSetup.renderer();
-
-    // FORM POPUP FOR ADDING IMAGES
-    const imageFormPopup = new PopupWithForm(
-      "#imageFormOverlay",
-      (data) => {
-        renderLoading(true, imageBtn);
-        api.addCard(data)
-          .then((data) => {
-            const newCardPrepend = new Card(
-              data,
-              () => {
-                imageOverviewPopup.open(data.name, data.link);
-              },
-              (cardID, cardTrash) => {
-                // POPUP DELETE FORM
-                const deleteFormPopup = new PopupWithForm(
-                  "#deleteFormOverlay",
-                  (cardID) => {
-                    api.removeCard(cardID)
-                      .then(() => {
-                        cardTrash.closest(".element").remove();
-                        deleteFormPopup.close();
-                      })
-                      .catch((err) => {
-                        console.log(err);
-                      })
-                  }
-                );
-                deleteFormPopup.open(cardID);
-                deleteFormPopup.setEventListeners();
-              }
-            );
-            initialSetup.prependItem(newCardPrepend.getCard());
-            renderLoading(false, imageBtn);
-          })
-          .catch((err) => {
-            console.log(err);
-          })
-          .finally(() => {
-            imageFormPopup.close()
-          })
-      }
-    );
-    addPlace.addEventListener("click", () => {
-      imageFormPopup.open();
-    });
-    imageFormPopup.setEventListeners();
-  });
-
-// USERINFO SELECTORS
-const userInfo = new UserInfo(".profile__info-title", ".profile__info-about", ".edit-form__input_name", ".edit-form__input_about", ".profile__avatar-image");
 
 // API FOR USERINFO
 api.apiUserInfo()
@@ -137,7 +35,79 @@ api.apiUserInfo()
     console.log(err);
   })
 
-// PROFILE: NAME AND PROFESSION
+
+// API FOR INITIALCARDS
+api.getInitialCards()
+  .then(res => {
+    function renderCards(cardItem) {
+      return new Card(
+        cardItem,
+        () => {
+          imageOverviewPopup.open(cardItem.name, cardItem.link)
+        },
+        (cardID, cardElement) => {
+          deleteFormPopup.open(cardID, cardElement);
+        },
+        (cardElement, cardID) => {
+          if (cardElement.isLiked()) {
+            api.removeLike(cardID)
+              .then(element => {
+                cardElement.updateLikes(element.likes)
+              })
+          } else {
+            api.addLike(cardID)
+              .then(element => {
+                cardElement.updateLikes(element.likes);
+                cardElement.showLikes();
+              })
+              .catch((err) => {
+                console.log(err);
+              })
+          }
+        }).getCard()
+    }
+
+    const initialSetup = new Section({
+      items: res,
+      renderer: (cardItem) => {
+        const cards = renderCards(cardItem);
+        initialSetup.addItem(cards);
+      }
+    }, cardElementSelector)
+
+    initialSetup.renderCards();
+
+    //FOR ADDING CARDS
+    const imageFormPopup = new PopupWithForm(
+      "#imageFormOverlay",
+      (data) => {
+        renderLoading(true, imageBtn);
+        api.addCard(data)
+          .then((data) => {
+            initialSetup.prependItem(renderCards(data));
+            renderLoading(false, imageBtn);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+          .finally(() => {
+            imageFormPopup.close()
+          })
+      }
+    );
+
+    // SET EVENT LISTENERS
+    imageFormPopup.setEventListeners();
+
+    /////////////// EVENT LISTENERS ///////////////
+    // ADD CARD
+    addPlace.addEventListener("click", () => {
+      imageFormPopup.open();
+    })
+  })
+
+/////////////// EVENT LISTENERS ///////////////
+// PROFILE: NAME AND JOB
 profileEdit.addEventListener("click", () => {
   editFormPopup.open();
   const getValues = userInfo.getUserInfo();
@@ -145,26 +115,16 @@ profileEdit.addEventListener("click", () => {
   currentJob.value = getValues.job;
 });
 
-// POPUP PROFILE FORM
-const editFormPopup = new PopupWithForm(
-  "#profileFormOverlay", (data) => {
-    renderLoading(true, profileBtn);
-    // API FOR EDITING PROFILE
-    api.editProfile({ name: data.Name, about: data.About })
-      .then(data => {
-        const avatarSource = userInfo.getUserInfo();
-        userInfo.setUserInfo({ newName: data.name, newJob: data.about, avatarSrc: avatarSource.avatar });
-        renderLoading(false, profileBtn);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        editFormPopup.close()
-      })
-  }
-);
-editFormPopup.setEventListeners();
+// AVATAR
+avatarEdit.addEventListener("click", () => {
+  avatarFormPopup.open()
+});
+
+
+// USERINFO SELECTORS
+const userInfo = new UserInfo(".profile__info-title", ".profile__info-about", ".edit-form__input_name", ".edit-form__input_about", ".profile__avatar-image");
+
+//////////////////// FORMS ////////////////////
 
 // POPUP AVATAR FORM
 const avatarFormPopup = new PopupWithForm("#avatarFormOverlay",
@@ -189,12 +149,48 @@ const avatarFormPopup = new PopupWithForm("#avatarFormOverlay",
       })
   })
 
-avatarFormPopup.setEventListeners();
-avatarEdit.addEventListener("click", () => {
-  avatarFormPopup.open()
-});
 
 // POPUP IMAGE OVERVIEW
 const imageOverviewPopup = new PopupWithImage("#imageOverlay");
-imageOverviewPopup.setEventListeners();
 
+
+// POPUP PROFILE FORM
+const editFormPopup = new PopupWithForm(
+  "#profileFormOverlay", (data) => {
+    renderLoading(true, profileBtn);
+    // API FOR EDITING PROFILE
+    api.editProfile({ name: data.Name, about: data.About })
+      .then(data => {
+        const avatarSource = userInfo.getUserInfo();
+        userInfo.setUserInfo({ newName: data.name, newJob: data.about, avatarSrc: avatarSource.avatar });
+        renderLoading(false, profileBtn);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        editFormPopup.close()
+      })
+  }
+);
+
+
+// DELETE FORM
+const deleteFormPopup = new PopupWithForm("#deleteFormOverlay",
+  (cardID) => {
+    api.removeCard(cardID)
+      .then(() => {
+        deleteFormPopup.close();
+        deleteFormPopup.removeCardElement();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+);
+
+// SET EVENT LISTENERS
+deleteFormPopup.setEventListeners();
+editFormPopup.setEventListeners();
+imageOverviewPopup.setEventListeners();
+avatarFormPopup.setEventListeners();

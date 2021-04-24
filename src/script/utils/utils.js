@@ -1,4 +1,4 @@
-export default function renderLoading(isLoading, selector, closingPopUp) {
+export default function renderLoading(isLoading, selector) {
   if (isLoading) {
     selector.textContent = "Saving...";
   } else {

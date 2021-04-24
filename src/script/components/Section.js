@@ -5,7 +5,7 @@ class Section {
     this._containerSelector = document.querySelector(containerSelector);
   }
 
-  renderer() {
+  renderCards() {
     this._initialArray.forEach((item) => {
       this._renderer(item);
     })

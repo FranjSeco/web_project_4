@@ -5,17 +5,24 @@ class PopupWithForm extends Popup {
     super(popupSelector);
     this._popupSubmit = popupSubmit;
 
+
     this._submitHandler = this._submitHandler.bind(this);
   }
 
-  open(cardInfo){
+  open(cardInfo, cardElement){
     super.open();
     this._info = cardInfo;
+    this._cardElement = cardElement;
+  }
+
+  removeCardElement() {
+    this._cardElement.remove();
   }
 
   close() {
     super.close();
     this._form.reset();
+
   }
 
   _getInputValues() {
