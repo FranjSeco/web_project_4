@@ -1,27 +1,27 @@
 class Popup {
-  constructor(popupSelector) {
-  this._popupSelector = document.querySelector(popupSelector);
+  constructor(popup) {
+  this._popup = document.querySelector(popup);
   this._handleEscClose = this._handleEscClose.bind(this);
   }
 
   open() {
-    this._popupSelector.classList.add("overlay_popup");
+    this._popup.classList.add("overlay_popup");
     document.addEventListener("keyup", this._handleEscClose);
   }
 
   close() {
-    this._popupSelector.classList.remove("overlay_popup");
+    this._popup.classList.remove("overlay_popup");
     document.removeEventListener("keyup", this._handleEscClose);
   }
 
   _handleEscClose(evt) {
-    if (evt.keyCode === 27) {
+    if (evt.key === "Escape") {
       this.close();
     }
   }
 
   setEventListeners() {
-    this._popupSelector.addEventListener("click", (evt) => {
+    this._popup.addEventListener("click", (evt) => {
       if (evt.target.classList.contains("close-icon") || evt.target.classList.contains('overlay_popup')) {
         this.close();
       }

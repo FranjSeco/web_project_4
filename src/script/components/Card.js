@@ -1,5 +1,5 @@
 class Card {
-  constructor(items, handleCardClick, handleDeleteClick, handleLike) {
+  constructor(items, handleCardClick, handleDeleteClick, handleLike, userID) {
     this._cardTitle = items.name;
     this._cardLink = items.link;
     this._cardOwnerID = items.owner._id;
@@ -8,7 +8,8 @@ class Card {
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
     this._handleLike = handleLike;
-    this._userId = "a2fbf9b0cad144ef98de1a23";
+    // this._userId = "a2fbf9b0cad144ef98de1a23";
+    this._userID = userID;
 
   }
 
@@ -25,7 +26,7 @@ class Card {
   }
 
   isLiked() {
-    return this._likes.some(item => item._id === this._userId);
+    return this._likes.some(item => item._id === this._userID);
   }
 
   _likeCounter() {
@@ -54,13 +55,13 @@ class Card {
   showLikes() {
     if (this._likes.length > 0) {
       this._cloneCard.querySelector(".element__like-counter").classList.add("element__like-counter_display");
-    } else if (this._likes.length = 0) {
+    } else if (this._likes.length === 0) {
       this._cloneCard.querySelector(".element__like-counter").classList.remove("element__like-counter_display");
     }
   }
 
   _showDeleteBtn() {
-    if (this._cardOwnerID == this._userId) {
+    if (this._cardOwnerID == this._userID) {
       this._cloneCard.querySelector(".element__trash").classList.add("element__trash_display");
     }
   }

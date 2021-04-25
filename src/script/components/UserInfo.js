@@ -1,10 +1,8 @@
 class UserInfo {
-  constructor(name, job, currentName, currentJob, avatar) {
+  constructor(name, job, avatar) {
     this._name = document.querySelector(name);
     this._about = document.querySelector(job);
     this._avatar = document.querySelector(avatar);
-    this._currentName = document.querySelector(currentName);
-    this._currentJob = document.querySelector(currentJob);
   }
 
   getUserInfo() {

@@ -1,53 +1,43 @@
 import Popup from "../components/Popup.js";
 
 class PopupWithForm extends Popup {
-  constructor(popupSelector, popupSubmit) {
-    super(popupSelector);
+  constructor(popup, popupSubmit) {
+    super(popup);
     this._popupSubmit = popupSubmit;
 
 
     this._submitHandler = this._submitHandler.bind(this);
   }
 
-  open(cardInfo, cardElement){
+  open(cardInfo){
     super.open();
     this._info = cardInfo;
-    this._cardElement = cardElement;
-  }
-
-  removeCardElement() {
-    this._cardElement.remove();
   }
 
   close() {
     super.close();
     this._form.reset();
-
   }
 
   _getInputValues() {
-    if (!this._form.querySelector(".form-input")) {
-      return null;
-
-    } else {
       const inputs = [...this._form.querySelectorAll(".form-input")];
       const inputValues = {};
       inputs.forEach((input) => {
         inputValues[input.name] = input.value;
       })
       return inputValues;
-    }
+
   }
 
   setEventListeners() {
     super.setEventListeners();
-    this._form = this._popupSelector.querySelector(".form");
+    this._form = this._popup.querySelector(".form");
     this._form.addEventListener("submit", this._submitHandler);
   }
 
   _submitHandler(evt) {
     evt.preventDefault();
-    const submittedValue = this._getInputValues() || this._info;
+    const submittedValue = this._getInputValues();
     this._popupSubmit(submittedValue);
   }
 }
