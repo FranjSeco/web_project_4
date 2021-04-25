@@ -6,8 +6,8 @@ class Api {
   }
 
   // RESPONSE CHECK
-  _responseCheck() {
-    return (res) => res.ok ? res.json() : Promise.reject(`Error!` + res.statusText)
+  _responseCheck(res) {
+    return res.ok ? res.json() : Promise.reject(`Error!` + res.statusText)
   }
 
 
@@ -16,7 +16,7 @@ class Api {
     return fetch(this._baseUrl + "/cards", {
       headers: this._headers
     })
-    .then(this._responseCheck())
+    .then(this._responseCheck)
   }
 
 
@@ -25,7 +25,7 @@ class Api {
     return fetch(this._baseUrl + "/users/me", {
       headers: this._headers
     })
-    .then(this._responseCheck())
+    .then(this._responseCheck)
   }
 
 
@@ -43,7 +43,7 @@ class Api {
         link
       })
     })
-    .then(this._responseCheck())
+    .then(this._responseCheck)
 
   }
 
@@ -53,7 +53,7 @@ class Api {
       headers: this._headers,
       method: "DELETE",
     })
-    .then(this._responseCheck())
+    .then(this._responseCheck)
 
   }
 
@@ -67,7 +67,7 @@ class Api {
         about
       })
     })
-    .then(this._responseCheck())
+    .then(this._responseCheck)
 
   }
 
@@ -79,7 +79,7 @@ class Api {
               avatar
           })
       })
-      .then(this._responseCheck())
+      .then(this._responseCheck)
 
   }
 
@@ -89,7 +89,7 @@ class Api {
       headers: this._headers,
       method: "PUT",
     })
-    .then(this._responseCheck())
+    .then(this._responseCheck)
 
   }
 
@@ -99,7 +99,7 @@ class Api {
       headers: this._headers,
       method: "DELETE",
     })
-    .then(this._responseCheck())
+    .then(this._responseCheck)
   }
 }
 
