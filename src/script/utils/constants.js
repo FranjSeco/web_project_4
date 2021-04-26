@@ -1,5 +1,3 @@
-
-
 const cardWrapper = document.querySelector(".elements");
 
 const imageFormOverlay = document.querySelector("#imageFormOverlay");

@@ -9,11 +9,6 @@ class PopupWithForm extends Popup {
     this._submitHandler = this._submitHandler.bind(this);
   }
 
-  open(cardInfo){
-    super.open();
-    this._info = cardInfo;
-  }
-
   close() {
     super.close();
     this._form.reset();

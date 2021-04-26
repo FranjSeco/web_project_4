@@ -17,11 +17,6 @@ class DeletePopupForm extends Popup {
     this._cardElement.remove();
   }
 
-  close() {
-    super.close();
-    this._form.reset();
-  }
-
   setEventListeners() {
     super.setEventListeners();
     this._form = this._popup.querySelector(".form");
