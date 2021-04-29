@@ -1,6 +1,6 @@
 import Popup from "./Popup.js";
 
-
+// changing the name
 class DeletePopupForm extends Popup {
   constructor(popup, popupSubmit) {
     super(popup);
